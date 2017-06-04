@@ -98,11 +98,11 @@
         <relationship name="pilots" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="People" inverseName="vehicles" inverseEntity="People" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Films" positionX="-36" positionY="9" width="128" height="240"/>
-        <element name="People" positionX="-63" positionY="-18" width="128" height="270"/>
-        <element name="Planets" positionX="-54" positionY="-9" width="128" height="240"/>
-        <element name="Species" positionX="-18" positionY="27" width="128" height="255"/>
-        <element name="Starships" positionX="18" positionY="63" width="128" height="300"/>
-        <element name="Vehicles" positionX="0" positionY="45" width="128" height="240"/>
+        <element name="Films" positionX="-36" positionY="-222" width="128" height="240"/>
+        <element name="People" positionX="-720" positionY="81" width="128" height="270"/>
+        <element name="Planets" positionX="-378" positionY="-312" width="128" height="240"/>
+        <element name="Species" positionX="-684" positionY="-255" width="128" height="255"/>
+        <element name="Starships" positionX="-18" positionY="81" width="128" height="300"/>
+        <element name="Vehicles" positionX="-243" positionY="45" width="128" height="240"/>
     </elements>
 </model>

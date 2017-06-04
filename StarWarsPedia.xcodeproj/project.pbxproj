@@ -13,6 +13,7 @@
 		0154CF4E1EE303580017900E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0154CF4C1EE303580017900E /* LaunchScreen.storyboard */; };
 		0154CF591EE303580017900E /* StarWarsPediaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0154CF581EE303580017900E /* StarWarsPediaTests.swift */; };
 		0154CF641EE303580017900E /* StarWarsPediaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0154CF631EE303580017900E /* StarWarsPediaUITests.swift */; };
+		0179AE161EE41E310089A472 /* SWAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0179AE151EE41E310089A472 /* SWAPI.swift */; };
 		01E839E71EE30CF00044DFAA /* StarWarsPedia.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01E839E51EE30CF00044DFAA /* StarWarsPedia.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +47,7 @@
 		0154CF5F1EE303580017900E /* StarWarsPediaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StarWarsPediaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0154CF631EE303580017900E /* StarWarsPediaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarWarsPediaUITests.swift; sourceTree = "<group>"; };
 		0154CF651EE303580017900E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0179AE151EE41E310089A472 /* SWAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SWAPI.swift; sourceTree = "<group>"; };
 		01E839E61EE30CF00044DFAA /* StarWarsPedia.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StarWarsPedia.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -97,6 +99,7 @@
 		0154CF421EE303580017900E /* StarWarsPedia */ = {
 			isa = PBXGroup;
 			children = (
+				0179AE141EE41DEF0089A472 /* WebService */,
 				01E839E41EE30CDC0044DFAA /* Controller */,
 				01E839E31EE30CD10044DFAA /* View */,
 				01E839E21EE30CCA0044DFAA /* Model */,
@@ -125,6 +128,14 @@
 				0154CF651EE303580017900E /* Info.plist */,
 			);
 			path = StarWarsPediaUITests;
+			sourceTree = "<group>";
+		};
+		0179AE141EE41DEF0089A472 /* WebService */ = {
+			isa = PBXGroup;
+			children = (
+				0179AE151EE41E310089A472 /* SWAPI.swift */,
+			);
+			name = WebService;
 			sourceTree = "<group>";
 		};
 		01E839E21EE30CCA0044DFAA /* Model */ = {
@@ -287,6 +298,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				01E839E71EE30CF00044DFAA /* StarWarsPedia.xcdatamodeld in Sources */,
+				0179AE161EE41E310089A472 /* SWAPI.swift in Sources */,
 				0154CF441EE303580017900E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
