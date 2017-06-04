@@ -16,8 +16,8 @@ enum SWAPIError: Error {
 
 /// Defines the path for a certain resource
 enum Method: String {
+    case allCharacters = "people/"
     case allFilms = "films/"
-    case allPeople = "people/"
     case allPlanets = "planets/"
     case allSpecies = "species/"
     case allStarships = "starhips/"
@@ -42,8 +42,8 @@ struct SWAPI {
         return SWAPIURL(method: .allFilms)
     }
     
-    static var allPeopleURL: URL {
-        return SWAPIURL(method: .allPeople)
+    static var allCharactersURL: URL {
+        return SWAPIURL(method: .allCharacters)
     }
     
     static var allPlanetsURL: URL {
@@ -68,6 +68,7 @@ struct SWAPI {
     
     
     
+    
     /// Method used to build the endpoint url
     private static func SWAPIURL(method: Method) -> URL {
         let baseURL = URL(string: baseURLString)!
@@ -86,7 +87,7 @@ struct SWAPI {
     }
     
     //--------------------
-    //MARK: -  People Methods
+    //MARK: -  Characters Methods
     //--------------------
     
 
