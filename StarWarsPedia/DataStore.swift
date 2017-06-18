@@ -110,11 +110,20 @@ class DataStore {
     
     
     ///Fetch all the persons from the web Service (SWAPI)
-    func fetchAllPersonsFromAPI(completion: @escaping (PersonsResult) -> Void) {
-        //Get the url from
-        let url = SWAPI.allPersonsURL
-        //Make a request with the url
-        let request = URLRequest(url: url)
+    func fetchAllPersonsFromAPI(fromURL url:URL? = nil, completion: @escaping (PersonsResult) -> Void) {
+        
+        let request: URLRequest
+        
+        if let url = url {
+            //Make a request with the url passed through
+           request = URLRequest(url: url)
+        } else {
+            //Make a request with the SWAPI url
+            let url = SWAPI.allPersonsURL
+            request = URLRequest(url: url)
+        }
+        
+        print(url?.absoluteString)
         
         
         //create an istance of URLSessionTask
@@ -126,11 +135,17 @@ class DataStore {
             
             //Debug outputs
             print(res.statusCode)
-            res.allHeaderFields.forEach { print("\($0): \($1)") }
             //----
             
-            self.processPersonsRequest(data: data, error: error) { (result) in
+            self.processPersonsRequest(data: data, error: error) { (result, NextPageURL) in
                 OperationQueue.main.addOperation {
+                    
+                    //if there is a next page
+                    if let url = NextPageURL {
+                        //make another request with the next page url
+                        self.fetchAllPersonsFromAPI(fromURL: url, completion: completion)
+                    }
+                    
                     completion(result)
                 }
             }
@@ -144,10 +159,10 @@ class DataStore {
     
     
     
-    //Process the request to the API
-    private func processPersonsRequest(data: Data?, error: Error?, completion: @escaping (PersonsResult) -> Void ) {
+    //Process the request to the API, returns a PersonResult object and an URL if there is a "next page" with the next page URL
+    private func processPersonsRequest(data: Data?, error: Error?, completion: @escaping (PersonsResult, URL?) -> Void ) {
         guard let jsonData = data else {
-            completion(.failure(error!))
+            completion(.failure(error!), nil)
             return
         }
         
@@ -161,12 +176,15 @@ class DataStore {
             //still convert the json data
             let result = SWAPI.persons(fromJSON: jsonData, into: context)
             
+            let personResult = result.0
+            let nextURL = result.1
+            
             //try to save the context (still the background)
             do {
                 try context.save()
             } catch {
                 print("Error saving the Core Data: \(error).")
-                completion(.failure(error))
+                completion(.failure(error), nil)
                 return
             }
             
@@ -176,14 +194,14 @@ class DataStore {
             //and we call the completion closure on the referenced entities
             //of the main queue
             
-            switch result {
+            switch personResult {
             case let .success(persons):
                 let personIDs = persons.map { return $0.objectID }
                 let viewContext = self.persistentContainer.viewContext
                 let viewContextPersons =  personIDs.map { return viewContext.object(with: $0) } as! [Person]
-                completion(.success(viewContextPersons))
+                completion(.success(viewContextPersons), nextURL)
             case .failure:
-                completion(result)
+                completion(personResult, nextURL)
             }
         }
     }

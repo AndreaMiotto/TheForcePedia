@@ -62,10 +62,10 @@ struct SWAPI {
         return SWAPIURL(method: .allVehicles)
     }
     
+    
     //--------------------
     //MARK: -  General Methods
     //--------------------
-    
     
     
     
@@ -90,7 +90,7 @@ struct SWAPI {
     //MARK: -  Persons Methods
     //--------------------
     
-    static func persons(fromJSON data: Data, into context: NSManagedObjectContext) -> PersonsResult {
+    static func persons(fromJSON data: Data, into context: NSManagedObjectContext) -> (PersonsResult, URL?) {
         do {
             //convert the jsonData into a jsonObject
             let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
@@ -101,7 +101,7 @@ struct SWAPI {
                 let personsArray = jsonDictionary["results"] as? [[String : Any]] else {
                     
                     //The JSON structure doesn't match our expectations
-                    return .failure(SWAPIError.invalidJSONData)
+                    return (.failure(SWAPIError.invalidJSONData), nil)
             }
             
             
@@ -117,12 +117,17 @@ struct SWAPI {
             if finalPersons.isEmpty && !personsArray.isEmpty {
                 //We weren't able to parse any of the personss
                 //Maybe the JSON format for persons has changed
-                return .failure(SWAPIError.invalidJSONData)
+                return (.failure(SWAPIError.invalidJSONData), nil)
+            }
+            //fetching the url for the next page of persons
+            
+            guard let urlString = jsonDictionary["next"] as? String, let url = URL(string: urlString) else {
+               return (.success(finalPersons), nil)
             }
             
-            return .success(finalPersons)
+            return (.success(finalPersons), url)
         } catch let error {
-            return .failure(error)
+            return (.failure(error), nil)
         }
     }
     
