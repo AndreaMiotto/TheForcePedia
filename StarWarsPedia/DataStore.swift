@@ -123,7 +123,8 @@ class DataStore {
             request = URLRequest(url: url)
         }
         
-        print(url?.absoluteString)
+        //DEBUG for url
+        //print(url?.absoluteString)
         
         
         //create an istance of URLSessionTask
@@ -168,7 +169,6 @@ class DataStore {
         
         //The following request is made in the background queue
         //beacuse it's an expensive task
-        
         
         //create a background context
         persistentContainer.performBackgroundTask { (context) in

@@ -16,6 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        //Add property injection
+        let rootViewController = window!.rootViewController as! UINavigationController
+        let landingViewController = rootViewController.topViewController as! LandingViewController
+        landingViewController.store = DataStore()
+        
         return true
     }
 

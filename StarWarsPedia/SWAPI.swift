@@ -27,7 +27,6 @@ enum Method: String {
 
 
 
-
 /// This **SWAPI** struct works as intermediate between the client and the SWAPI Web Service.
 struct SWAPI {
     
