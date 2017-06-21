@@ -20,6 +20,17 @@ class LandingViewController: UITableViewController {
     var store: DataStore!
     
     
+    override func viewDidLoad() {
+        store.fetchAllPersonsFromAPI() { (personResult) in
+            print("characters downloaded")
+        }
+        
+        store.fetchAllFilmsFromAPI { (filmResult) in
+            print("films downloaded")
+        }
+    }
+    
+    
     //--------------------
     //MARK: - Methods
     //--------------------
