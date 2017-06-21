@@ -129,8 +129,6 @@ struct SWAPI {
         }
     }
     
-        
-    
     ///Transform the json person into a Person and return it.
     private static func person(fromJSON json: [String : Any], into context: NSManagedObjectContext) -> Person? {
         guard
@@ -168,9 +166,6 @@ struct SWAPI {
         return person
     }
     
-    
-    
-    
     //--------------------
     //MARK: -  Films Methods
     //--------------------
@@ -190,9 +185,7 @@ struct SWAPI {
             }
             
             var finalFilms = [Film]()
-            
             for filmJSON in filmsArray {
-                
                 if let film = film(fromJSON: filmJSON, into: context) {
                     finalFilms.append(film)
                 }
@@ -260,6 +253,22 @@ struct SWAPI {
         }
         return film
     }
+    
+    //--------------------
+    //MARK: -  Planets Methods
+    //--------------------
+    
+    //--------------------
+    //MARK: -  Species Methods
+    //--------------------
+    
+    //--------------------
+    //MARK: -  Starhsips Methods
+    //--------------------
+    
+    //--------------------
+    //MARK: -  Vehicles Methods
+    //--------------------
 
     //--------------------
     //MARK: - Helpers
