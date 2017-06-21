@@ -30,9 +30,11 @@ class PersonsTableViewController: UITableViewController {
         
         self.updateDataSource()
         
+        /*
         store.fetchAllPersonsFromAPI() { (personResult) in
          self.updateDataSource()
         }
+         */
  
  
     }
