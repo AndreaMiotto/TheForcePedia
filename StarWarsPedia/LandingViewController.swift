@@ -28,8 +28,11 @@ class LandingViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case "showPersons"?:
-            
             let destinationVC = segue.destination as! PersonsTableViewController
+            destinationVC.store = store
+            
+        case "showFilms"?:
+            let destinationVC = segue.destination as! FilmsTableViewController
             destinationVC.store = store
         
         default:

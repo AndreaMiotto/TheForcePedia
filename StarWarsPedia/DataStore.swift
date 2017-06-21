@@ -18,6 +18,11 @@ enum PersonsResult {
     case failure(Error)
 }
 
+enum FilmsResult {
+    case success([Film])
+    case failure(Error)
+}
+
 
 //--------------------
 //MARK: - Error Types
@@ -113,7 +118,6 @@ class DataStore {
     func fetchAllPersonsFromAPI(fromURL url:URL? = nil, completion: @escaping (PersonsResult) -> Void) {
         
         let request: URLRequest
-        
         if let url = url {
             //Make a request with the url passed through
            request = URLRequest(url: url)
@@ -123,20 +127,10 @@ class DataStore {
             request = URLRequest(url: url)
         }
         
-        //DEBUG for url
-        //print(url?.absoluteString)
-        
-        
         //create an istance of URLSessionTask
         //by giving the session a request and a completion closure
         let task = session.dataTask(with: request) {
             (data, response, error) -> Void in
-            
-            let res = response as! HTTPURLResponse
-            
-            //Debug outputs
-            print(res.statusCode)
-            //----
             
             self.processPersonsRequest(data: data, error: error) { (result, NextPageURL) in
                 OperationQueue.main.addOperation {
@@ -146,21 +140,17 @@ class DataStore {
                         //make another request with the next page url
                         self.fetchAllPersonsFromAPI(fromURL: url, completion: completion)
                     }
-                    
                     completion(result)
                 }
             }
         }
-        
-        
         //start the web service request
         task.resume()
-        
     }
     
     
     
-    //Process the request to the API, returns a PersonResult object and an URL if there is a "next page" with the next page URL
+    ///Process the request to the API, returns a PersonResult object and an URL if there is a "next page" with the next page URL
     private func processPersonsRequest(data: Data?, error: Error?, completion: @escaping (PersonsResult, URL?) -> Void ) {
         guard let jsonData = data else {
             completion(.failure(error!), nil)
@@ -202,6 +192,109 @@ class DataStore {
                 completion(.success(viewContextPersons), nextURL)
             case .failure:
                 completion(personResult, nextURL)
+            }
+        }
+    }
+    
+    //--------------------
+    //MARK: -  Films Methods
+    //--------------------
+
+    ///Fetch all films from CoreData
+    func fetchAllFilmsFromDB(completition: @escaping (FilmsResult) -> Void) {
+        let fetchRequest: NSFetchRequest<Film> = Film.fetchRequest()
+        let sortByTitle = NSSortDescriptor(key: #keyPath(Film.title), ascending: true)
+        fetchRequest.sortDescriptors = [sortByTitle]
+        
+        let viewContext = persistentContainer.viewContext
+        viewContext.perform {
+            do {
+                let allFilms = try viewContext.fetch(fetchRequest)
+                completition(.success(allFilms))
+            } catch {
+                completition(.failure(error))
+            }
+        }
+    }
+    
+    
+    
+    ///Fetch all the films from the web Service (SWAPI)
+    func fetchAllFilmsFromAPI(fromURL url:URL? = nil, completion: @escaping (FilmsResult) -> Void) {
+        
+        let request: URLRequest
+        if let url = url {
+            //Make a request with the url passed through
+            request = URLRequest(url: url)
+        } else {
+            //Make a request with the SWAPI url
+            let url = SWAPI.allFilmsURL
+            request = URLRequest(url: url)
+        }
+        
+        //create an istance of URLSessionTask
+        //by giving the session a request and a completion closure
+        let task = session.dataTask(with: request) {
+            (data, response, error) -> Void in
+                        
+            self.processFilmsRequest(data: data, error: error) { (result, NextPageURL) in
+                OperationQueue.main.addOperation {
+                    
+                    //if there is a next page
+                    if let url = NextPageURL {
+                        //make another request with the next page url
+                        self.fetchAllFilmsFromAPI(fromURL: url, completion: completion)
+                    }
+                    completion(result)
+                }
+            }
+        }
+        //start the web service request
+        task.resume()
+    }
+    
+    
+    ///Process the request to the API, returns a PersonResult object and an URL if there is a "next page" with the next page URL
+    private func processFilmsRequest(data: Data?, error: Error?, completion: @escaping (FilmsResult, URL?) -> Void ) {
+        guard let jsonData = data else {
+            completion(.failure(error!), nil)
+            return
+        }
+        
+        //The following request is made in the background queue
+        //beacuse it's an expensive task
+        
+        //create a background context
+        persistentContainer.performBackgroundTask { (context) in
+            
+            //still convert the json data
+            let result = SWAPI.films(fromJSON: jsonData, into: context)
+            let filmResult = result.0
+            let nextURL = result.1
+            
+            //try to save the context (still the background)
+            do {
+                try context.save()
+            } catch {
+                print("Error saving the Core Data: \(error).")
+                completion(.failure(error), nil)
+                return
+            }
+            
+            //now we need to bring the context result into the main queue
+            //to do that we extract the object identifier for each entity in the bg queue
+            //than we create a reference with the entities in the main queue
+            //and we call the completion closure on the referenced entities
+            //of the main queue
+            
+            switch filmResult {
+            case let .success(films):
+                let filmIDs = films.map { return $0.objectID }
+                let viewContext = self.persistentContainer.viewContext
+                let viewContextFilms =  filmIDs.map { return viewContext.object(with: $0) } as! [Film]
+                completion(.success(viewContextFilms), nextURL)
+            case .failure:
+                completion(filmResult, nextURL)
             }
         }
     }
