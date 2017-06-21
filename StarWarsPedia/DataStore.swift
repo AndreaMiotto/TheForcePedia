@@ -116,7 +116,6 @@ class DataStore {
     
     ///Fetch all the persons from the web Service (SWAPI)
     func fetchAllPersonsFromAPI(fromURL url:URL? = nil, completion: @escaping (PersonsResult) -> Void) {
-        
         let request: URLRequest
         if let url = url {
             //Make a request with the url passed through
@@ -132,9 +131,14 @@ class DataStore {
         let task = session.dataTask(with: request) {
             (data, response, error) -> Void in
             
+            let res = response as! HTTPURLResponse
+            
+            //Debug outputs
+            print(res.statusCode)
+            //----
+            
             self.processPersonsRequest(data: data, error: error) { (result, NextPageURL) in
                 OperationQueue.main.addOperation {
-                    
                     //if there is a next page
                     if let url = NextPageURL {
                         //make another request with the next page url
