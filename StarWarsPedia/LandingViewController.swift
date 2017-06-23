@@ -28,6 +28,10 @@ class LandingViewController: UITableViewController {
         store.fetchAllFilmsFromAPI { (filmResult) in
             print("films downloaded")
         }
+        
+        store.fetchAllPlanetsFromAPI { (planetResult) in
+            print("planets downloaded")
+        }
     }
     
     
@@ -44,6 +48,10 @@ class LandingViewController: UITableViewController {
             
         case "showFilms"?:
             let destinationVC = segue.destination as! FilmsTableViewController
+            destinationVC.store = store
+            
+        case "showPlanets"?:
+            let destinationVC = segue.destination as! PlanetsTableViewController
             destinationVC.store = store
         
         default:

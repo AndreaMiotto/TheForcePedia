@@ -258,6 +258,86 @@ struct SWAPI {
     //MARK: -  Planets Methods
     //--------------------
     
+    ///Transform a bunch of data planets into an array of Planets. Returns an array of Planets with the next page URL
+    static func planets(fromJSON data: Data, into context: NSManagedObjectContext) -> (PlanetsResult, URL?) {
+        do {
+            //convert the jsonData into a jsonObject
+            let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
+            
+            guard
+                let jsonDictionary = jsonObject as? [AnyHashable : Any],
+                let planetsArray = jsonDictionary["results"] as? [[String : Any]] else {
+                    
+                    //The JSON structure doesn't match our expectations
+                    return (.failure(SWAPIError.invalidJSONData), nil)
+            }
+            
+            var finalPlanets = [Planet]()
+            for planetJSON in planetsArray {
+                
+                if let planet = planet(fromJSON: planetJSON, into: context) {
+                    finalPlanets.append(planet)
+                }
+            }
+            
+            if finalPlanets.isEmpty && !planetsArray.isEmpty {
+                //We weren't able to parse any of the planets
+                //Maybe the JSON format for planets has changed
+                return (.failure(SWAPIError.invalidJSONData), nil)
+            }
+            
+            //fetching the url for the next page of planets
+            guard let urlString = jsonDictionary["next"] as? String, let url = URL(string: urlString) else {
+                //if the next url points to nil
+                return (.success(finalPlanets), nil)
+            }
+            return (.success(finalPlanets), url)
+        } catch let error {
+            return (.failure(error), nil)
+        }
+    }
+    
+    ///Transform the json planet into a Planet and return it.
+    private static func planet(fromJSON json: [String : Any], into context: NSManagedObjectContext) -> Planet? {
+        guard
+            let name = json["name"] as? String,
+            let climate = json["climate"] as? String,
+            let terrain = json["terrain"] as? String,
+            let url = json["url"] as? String else {
+                
+                //Don't have enough information to construct a Planet
+                print("Don't have enough information to construct a Planet")
+                return nil
+        }
+        
+        //Need to know if we have already created a Planet with the same name in the Core Data
+        let fetchRequest: NSFetchRequest<Planet> = Planet.fetchRequest()
+        let predicate = NSPredicate(format: "\(#keyPath(Planet.name)) == %@", name)
+        fetchRequest.predicate = predicate
+        
+        var fetchedPlanets: [Planet]?
+        context.performAndWait {
+            fetchedPlanets = try? fetchRequest.execute()
+        }
+        //The planet already exist in Core Data?
+        if let existingPlanet = fetchedPlanets?.first {
+            //Yes, so return it
+            return existingPlanet
+        }
+        //No, so create it and we return it
+        var planet: Planet!
+        //use performAndWait (Synch vs perform Asynch) beacue
+        //it has to return the planet genereted into insert operation
+        context.performAndWait {
+            planet = Planet(context: context)
+            planet.name = name
+            planet.terrain = terrain
+            planet.climate = climate
+            planet.url = url
+        }
+        return planet
+    }
+    
     //--------------------
     //MARK: -  Species Methods
     //--------------------

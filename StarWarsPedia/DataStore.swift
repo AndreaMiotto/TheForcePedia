@@ -23,14 +23,15 @@ enum FilmsResult {
     case failure(Error)
 }
 
+enum PlanetsResult {
+    case success([Planet])
+    case failure(Error)
+}
+
 
 //--------------------
 //MARK: - Error Types
 //--------------------
-
-enum PersonError: Error {
-    case personCreationError
-}
 
 class DataStore {
     
@@ -60,41 +61,6 @@ class DataStore {
     //--------------------
     //MARK: - Person Methods
     //--------------------
-    
-    /*
-    verifico che una risorsa esiste già con una scansione per risorse.url == url,
-    importare controllare la data di modifica, ma questo mi costringe a ricaricare la risorsa.
-    probabile evitare
-    e magari creare una funzione update che per ogni risorsa mi controlla la data di modifica
-    
-    Quando creo una risorsa matematicamente creo anche le risorse associate
-    si instaura una reazione a catena che mi crea moltissime risorse (forse anche tutte)
-    potrebbero esserci conflitti
-    
-    func richiediTuttleLeRisorseDiUnTipo(tipo, contesto) {
-        creo richiesta base
-        contPagina: Int? = 1
-        do {
-            richiediRisorsePerPagina {
-                per ogni risorsa {
-                    //verifico che non sia già presente in DB
-                    se non è presente la creo, quindi {
-                        creazione
-                        aggiungo attributi
-                        salvo qui o solo dopo?
-                        per ogni relazione {
-                            controllo che l’entità non sia già presente
-                            altrimenti scarico l’entità associata e la inserisco nel db
-                            aggiungo la relazione
-                        }
-                        salvo solo qui o anche prima ?
-                    }
-                }
-            }
-            contPagina = Int(nextPage)
-        } while (contPagina != nil)	
-    }
- */
     
     ///Fetch all persons from CoreData
     func fetchAllPersonsFromDB(completition: @escaping (PersonsResult) -> Void) {
@@ -302,6 +268,117 @@ class DataStore {
             }
         }
     }
+    
+    
+    //--------------------
+    //MARK: - Planets Methods
+    //--------------------
+    
+    ///Fetch all planets from CoreData
+    func fetchAllPlanetsFromDB(completition: @escaping (PlanetsResult) -> Void) {
+        let fetchRequest: NSFetchRequest<Planet> = Planet.fetchRequest()
+        let sortByName = NSSortDescriptor(key: #keyPath(Planet.name), ascending: true)
+        fetchRequest.sortDescriptors = [sortByName]
+        
+        let viewContext = persistentContainer.viewContext
+        viewContext.perform {
+            do {
+                let allPlanets = try viewContext.fetch(fetchRequest)
+                completition(.success(allPlanets))
+            } catch {
+                completition(.failure(error))
+            }
+        }
+    }
+    
+    
+    ///Fetch all the planets from the web Service (SWAPI)
+    func fetchAllPlanetsFromAPI(fromURL url:URL? = nil, completion: @escaping (PlanetsResult) -> Void) {
+        let request: URLRequest
+        if let url = url {
+            //Make a request with the url passed through
+            request = URLRequest(url: url)
+        } else {
+            //Make a request with the SWAPI url
+            let url = SWAPI.allPlanetsURL
+            request = URLRequest(url: url)
+        }
+        
+        //create an istance of URLSessionTask
+        //by giving the session a request and a completion closure
+        let task = session.dataTask(with: request) {
+            (data, response, error) -> Void in
+            
+            let res = response as! HTTPURLResponse
+            
+            //Debug outputs
+            print(res.statusCode)
+            //----
+            
+            self.processPlanetsRequest(data: data, error: error) { (result, NextPageURL) in
+                OperationQueue.main.addOperation {
+                    //if there is a next page
+                    if let url = NextPageURL {
+                        //make another request with the next page url
+                        self.fetchAllPlanetsFromAPI(fromURL: url, completion: completion)
+                    }
+                    completion(result)
+                }
+            }
+        }
+        //start the web service request
+        task.resume()
+    }
+    
+    
+    
+    
+    ///Process the request to the API, returns a PlanetsResult object and an URL if there is a "next page" with the next page URL
+    private func processPlanetsRequest(data: Data?, error: Error?, completion: @escaping (PlanetsResult, URL?) -> Void ) {
+        guard let jsonData = data else {
+            completion(.failure(error!), nil)
+            return
+        }
+        
+        //The following request is made in the background queue
+        //beacuse it's an expensive task
+        
+        //create a background context
+        persistentContainer.performBackgroundTask { (context) in
+            
+            //still convert the json data
+            let result = SWAPI.planets(fromJSON: jsonData, into: context)
+            
+            let planetResult = result.0
+            let nextURL = result.1
+            
+            //try to save the context (still the background)
+            do {
+                try context.save()
+            } catch {
+                print("Error saving the Core Data: \(error).")
+                completion(.failure(error), nil)
+                return
+            }
+            
+            //now we need to bring the context result into the main queue
+            //to do that we extract the object identifier for each entity in the bg queue
+            //than we create a reference with the entities in the main queue
+            //and we call the completion closure on the referenced entities
+            //of the main queue
+            
+            switch planetResult {
+            case let .success(planets):
+                let planetIDs = planets.map { return $0.objectID }
+                let viewContext = self.persistentContainer.viewContext
+                let viewContextPlanets =  planetIDs.map { return viewContext.object(with: $0) } as! [Planet]
+                completion(.success(viewContextPlanets), nextURL)
+            case .failure:
+                completion(planetResult, nextURL)
+            }
+        }
+    }
+
 
     
     //--------------------

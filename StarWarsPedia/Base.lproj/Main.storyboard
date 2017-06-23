@@ -56,6 +56,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="ms6-Bx-QJv" kind="show" identifier="showPlanets" id="jtH-Nz-q43"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="iJy-8B-XFG" style="IBUITableViewCellStyleDefault" id="k31-TW-X7v">
                                         <rect key="frame" x="0.0" y="88" width="375" height="44"/>
@@ -199,6 +202,34 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6fB-a7-prp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1825" y="425"/>
+        </scene>
+        <!--Planets-->
+        <scene sceneID="muS-pc-aV6">
+            <objects>
+                <tableViewController title="Planets" id="ms6-Bx-QJv" customClass="PlanetsTableViewController" customModule="StarWarsPedia" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Da8-hL-wcm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="planetCell" id="JBH-Wr-u2v">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JBH-Wr-u2v" id="tNN-Wp-pN7">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="ms6-Bx-QJv" id="rIy-BR-BAn"/>
+                            <outlet property="delegate" destination="ms6-Bx-QJv" id="7rv-jY-TTR"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="62b-bq-0v9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1829" y="1084"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="BKI-wO-bsp">
