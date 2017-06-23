@@ -32,6 +32,18 @@ class LandingViewController: UITableViewController {
         store.fetchAllPlanetsFromAPI { (planetResult) in
             print("planets downloaded")
         }
+        
+        store.fetchAllSpeciesFromAPI { (specieResult) in
+            print("species downloaded")
+        }
+        
+        store.fetchAllStarshipsFromAPI { (starshipResult) in
+            print("starships downloaded")
+        }
+        
+        store.fetchAllVehiclesFromAPI { (vehicleResult) in
+            print("vehicles downloaded")
+        }
     }
     
     
@@ -52,6 +64,17 @@ class LandingViewController: UITableViewController {
             
         case "showPlanets"?:
             let destinationVC = segue.destination as! PlanetsTableViewController
+            destinationVC.store = store
+            
+        case "showSpecies"?:
+            let destinationVC = segue.destination as! SpeciesTableViewController
+            destinationVC.store = store
+            
+        case "showStarships"?:
+            let destinationVC = segue.destination as! StarshipsTableViewController
+            destinationVC.store = store
+        case "showVehicles"?:
+            let destinationVC = segue.destination as! VehiclesTableViewController
             destinationVC.store = store
         
         default:

@@ -21,7 +21,7 @@ enum Method: String {
     case allFilms = "films/"
     case allPlanets = "planets/"
     case allSpecies = "species/"
-    case allStarships = "starhips/"
+    case allStarships = "starships/"
     case allVehicles = "vehicles/"
     
 }
@@ -342,13 +342,273 @@ struct SWAPI {
     //MARK: -  Species Methods
     //--------------------
     
+    ///Transform a bunch of data species into an array of Species. Returns an array of Species with the next page URL
+    static func species(fromJSON data: Data, into context: NSManagedObjectContext) -> (SpeciesResult, URL?) {
+        do {
+            //convert the jsonData into a jsonObject
+            let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
+            
+            guard
+                let jsonDictionary = jsonObject as? [AnyHashable : Any],
+                let speciesArray = jsonDictionary["results"] as? [[String : Any]] else {
+                    
+                    //The JSON structure doesn't match our expectations
+                    return (.failure(SWAPIError.invalidJSONData), nil)
+            }
+            
+            var finalSpecies = [Specie]()
+            for specieJSON in speciesArray {
+                
+                if let specie = specie(fromJSON: specieJSON, into: context) {
+                    finalSpecies.append(specie)
+                }
+            }
+            
+            if finalSpecies.isEmpty && !speciesArray.isEmpty {
+                //We weren't able to parse any of the species
+                //Maybe the JSON format for species has changed
+                return (.failure(SWAPIError.invalidJSONData), nil)
+            }
+            
+            //fetching the url for the next page of species
+            guard let urlString = jsonDictionary["next"] as? String, let url = URL(string: urlString) else {
+                //if the next url points to nil
+                return (.success(finalSpecies), nil)
+            }
+            return (.success(finalSpecies), url)
+        } catch let error {
+            return (.failure(error), nil)
+        }
+    }
+    
+    ///Transform the json specie into a Specie and return it.
+    private static func specie(fromJSON json: [String : Any], into context: NSManagedObjectContext) -> Specie? {
+        guard
+            let name = json["name"] as? String,
+            let classficiation = json["classification"] as? String,
+            let designation = json["designation"] as? String,
+            let eye_colors = json["eye_colors"] as? String,
+            let hair_colors = json["hair_colors"] as? String,
+            let language = json["language"] as? String,
+            let skin_colors = json["skin_colors"] as? String,
+            let url = json["url"] as? String else {
+                
+                //Don't have enough information to construct a Specie
+                print("Don't have enough information to construct a Specie")
+                return nil
+        }
+        
+        //Need to know if we have already created a Specie with the same name in the Core Data
+        let fetchRequest: NSFetchRequest<Specie> = Specie.fetchRequest()
+        let predicate = NSPredicate(format: "\(#keyPath(Specie.name)) == %@", name)
+        fetchRequest.predicate = predicate
+        
+        var fetchedSpecies: [Specie]?
+        context.performAndWait {
+            fetchedSpecies = try? fetchRequest.execute()
+        }
+        //The specie already exist in Core Data?
+        if let existingSpecie = fetchedSpecies?.first {
+            //Yes, so return it
+            return existingSpecie
+        }
+        //No, so create it and we return it
+        var specie: Specie!
+        //use performAndWait (Synch vs perform Asynch) beacue
+        //it has to return the specie genereted into insert operation
+        context.performAndWait {
+            specie = Specie(context: context)
+            specie.name = name
+            specie.classification = classficiation
+            specie.designation = designation
+            specie.language = language
+            specie.skin_colors = skin_colors
+            specie.hair_colors = hair_colors
+            specie.eye_colors = eye_colors
+            specie.url = url
+        }
+        return specie
+    }
+    
     //--------------------
     //MARK: -  Starhsips Methods
     //--------------------
     
+    ///Transform a bunch of data starships into an array of Starships. Returns an array of Starships with the next page URL
+    static func starships(fromJSON data: Data, into context: NSManagedObjectContext) -> (StarshipsResult, URL?) {
+        do {
+            //convert the jsonData into a jsonObject
+            let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
+            
+            guard
+                let jsonDictionary = jsonObject as? [AnyHashable : Any],
+                let starshipsArray = jsonDictionary["results"] as? [[String : Any]] else {
+                    
+                    //The JSON structure doesn't match our expectations
+                    return (.failure(SWAPIError.invalidJSONData), nil)
+            }
+            
+            var finalStarships = [Starship]()
+            for starshipJSON in starshipsArray {
+                
+                if let starship = starship(fromJSON: starshipJSON, into: context) {
+                    finalStarships.append(starship)
+                } else {
+                }
+            }
+            
+            if finalStarships.isEmpty && !starshipsArray.isEmpty {
+                //We weren't able to parse any of the starships
+                //Maybe the JSON format for starships has changed
+                return (.failure(SWAPIError.invalidJSONData), nil)
+            }
+            
+            //fetching the url for the next page of starships
+            guard let urlString = jsonDictionary["next"] as? String, let url = URL(string: urlString) else {
+                //if the next url points to nil
+                return (.success(finalStarships), nil)
+            }
+            return (.success(finalStarships), url)
+        } catch let error {
+            return (.failure(error), nil)
+        }
+    }
+    
+    ///Transform the json starship into a Starship and return it.
+    private static func starship(fromJSON json: [String : Any], into context: NSManagedObjectContext) -> Starship? {
+        guard
+            let name = json["name"] as? String,
+            let consumables = json["consumables"] as? String,
+            let manufacturer = json["manufacturer"] as? String,
+            let mglt = json["MGLT"] as? String,
+            let model = json["model"] as? String,
+            let starship_class = json["starship_class"] as? String,
+            let url = json["url"] as? String else {
+                
+                //Don't have enough information to construct a Starship
+                print("Don't have enough information to construct a Starship")
+                return nil
+        }
+        
+        //Need to know if we have already created a Starship with the same name in the Core Data
+        let fetchRequest: NSFetchRequest<Starship> = Starship.fetchRequest()
+        let predicate = NSPredicate(format: "\(#keyPath(Starship.name)) == %@", name)
+        fetchRequest.predicate = predicate
+        
+        var fetchedStarships: [Starship]?
+        context.performAndWait {
+            fetchedStarships = try? fetchRequest.execute()
+        }
+        //The starship already exist in Core Data?
+        if let existingStarship = fetchedStarships?.first {
+            //Yes, so return it
+            return existingStarship
+        }
+        //No, so create it and we return it
+        var starship: Starship!
+        //use performAndWait (Synch vs perform Asynch) beacue
+        //it has to return the starship genereted into insert operation
+        context.performAndWait {
+            starship = Starship(context: context)
+            starship.name = name
+            starship.url = url
+            starship.consumables = consumables
+            starship.manufacturer = manufacturer
+            starship.mglt = mglt
+            starship.model = model
+            starship.starship_class = starship_class
+        }
+        return starship
+    }
+    
     //--------------------
     //MARK: -  Vehicles Methods
     //--------------------
+    
+    ///Transform a bunch of data vehicles into an array of Vehicles. Returns an array of Vehicles with the next page URL
+    static func vehicles(fromJSON data: Data, into context: NSManagedObjectContext) -> (VehiclesResult, URL?) {
+        do {
+            //convert the jsonData into a jsonObject
+            let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
+            
+            guard
+                let jsonDictionary = jsonObject as? [AnyHashable : Any],
+                let vehiclesArray = jsonDictionary["results"] as? [[String : Any]] else {
+                    
+                    //The JSON structure doesn't match our expectations
+                    return (.failure(SWAPIError.invalidJSONData), nil)
+            }
+            
+            var finalVehicles = [Vehicle]()
+            for vehicleJSON in vehiclesArray {
+                
+                if let vehicle = vehicle(fromJSON: vehicleJSON, into: context) {
+                    finalVehicles.append(vehicle)
+                }
+            }
+            
+            if finalVehicles.isEmpty && !vehiclesArray.isEmpty {
+                //We weren't able to parse any of the vehicles
+                //Maybe the JSON format for vehicles has changed
+                return (.failure(SWAPIError.invalidJSONData), nil)
+            }
+            
+            //fetching the url for the next page of vehicles
+            guard let urlString = jsonDictionary["next"] as? String, let url = URL(string: urlString) else {
+                //if the next url points to nil
+                return (.success(finalVehicles), nil)
+            }
+            return (.success(finalVehicles), url)
+        } catch let error {
+            return (.failure(error), nil)
+        }
+    }
+    
+    ///Transform the json vehicle into a Vehicle and return it.
+    private static func vehicle(fromJSON json: [String : Any], into context: NSManagedObjectContext) -> Vehicle? {
+        guard
+            let name = json["name"] as? String,
+            let consumables = json["consumables"] as? String,
+            let manufacturer = json["manufacturer"] as? String,
+            let model = json["name"] as? String,
+            let vehicle_class = json["vehicle_class"] as? String,
+            let url = json["url"] as? String else {
+                
+                //Don't have enough information to construct a Vehicle
+                print("Don't have enough information to construct a Vehicle")
+                return nil
+        }
+        
+        //Need to know if we have already created a Vehicle with the same name in the Core Data
+        let fetchRequest: NSFetchRequest<Vehicle> = Vehicle.fetchRequest()
+        let predicate = NSPredicate(format: "\(#keyPath(Vehicle.name)) == %@", name)
+        fetchRequest.predicate = predicate
+        
+        var fetchedVehicles: [Vehicle]?
+        context.performAndWait {
+            fetchedVehicles = try? fetchRequest.execute()
+        }
+        //The vehicle already exist in Core Data?
+        if let existingVehicle = fetchedVehicles?.first {
+            //Yes, so return it
+            return existingVehicle
+        }
+        //No, so create it and we return it
+        var vehicle: Vehicle!
+        //use performAndWait (Synch vs perform Asynch) beacue
+        //it has to return the vehicle genereted into insert operation
+        context.performAndWait {
+            vehicle = Vehicle(context: context)
+            vehicle.name = name
+            vehicle.url = url
+            vehicle.consumables = consumables
+            vehicle.manufacturer = manufacturer
+            vehicle.model = model
+            vehicle.vehicle_class = vehicle_class
+ 
+        }
+        return vehicle
+    }
 
     //--------------------
     //MARK: - Helpers

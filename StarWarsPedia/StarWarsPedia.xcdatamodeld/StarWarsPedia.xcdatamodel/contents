@@ -78,7 +78,7 @@
         <attribute name="model" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="passengers" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="starhip_class" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="starship_class" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="films" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Film" inverseName="starships" inverseEntity="Film" syncable="YES"/>
         <relationship name="pilots" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Person" inverseName="starships" inverseEntity="Person" syncable="YES"/>

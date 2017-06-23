@@ -28,6 +28,21 @@ enum PlanetsResult {
     case failure(Error)
 }
 
+enum SpeciesResult {
+    case success([Specie])
+    case failure(Error)
+}
+
+enum StarshipsResult {
+    case success([Starship])
+    case failure(Error)
+}
+
+enum VehiclesResult {
+    case success([Vehicle])
+    case failure(Error)
+}
+
 
 //--------------------
 //MARK: - Error Types
@@ -380,6 +395,334 @@ class DataStore {
     }
 
 
+    
+    //--------------------
+    //MARK: -  Species Methods
+    //--------------------
+    
+    ///Fetch all species from CoreData
+    func fetchAllSpeciesFromDB(completition: @escaping (SpeciesResult) -> Void) {
+        let fetchRequest: NSFetchRequest<Specie> = Specie.fetchRequest()
+        let sortByName = NSSortDescriptor(key: #keyPath(Specie.name), ascending: true)
+        fetchRequest.sortDescriptors = [sortByName]
+        
+        let viewContext = persistentContainer.viewContext
+        viewContext.perform {
+            do {
+                let allSpecies = try viewContext.fetch(fetchRequest)
+                completition(.success(allSpecies))
+            } catch {
+                completition(.failure(error))
+            }
+        }
+    }
+    
+    
+    ///Fetch all the species from the web Service (SWAPI)
+    func fetchAllSpeciesFromAPI(fromURL url:URL? = nil, completion: @escaping (SpeciesResult) -> Void) {
+        let request: URLRequest
+        if let url = url {
+            //Make a request with the url passed through
+            request = URLRequest(url: url)
+        } else {
+            //Make a request with the SWAPI url
+            let url = SWAPI.allSpeciesURL
+            request = URLRequest(url: url)
+        }
+        
+        //create an istance of URLSessionTask
+        //by giving the session a request and a completion closure
+        let task = session.dataTask(with: request) {
+            (data, response, error) -> Void in
+            
+            let res = response as! HTTPURLResponse
+            
+            //Debug outputs
+            print(res.statusCode)
+            //----
+            
+            self.processSpeciesRequest(data: data, error: error) { (result, NextPageURL) in
+                OperationQueue.main.addOperation {
+                    //if there is a next page
+                    if let url = NextPageURL {
+                        //make another request with the next page url
+                        self.fetchAllSpeciesFromAPI(fromURL: url, completion: completion)
+                    }
+                    completion(result)
+                }
+            }
+        }
+        //start the web service request
+        task.resume()
+    }
+    
+    
+    
+    
+    ///Process the request to the API, returns a SpeciesResult object and an URL if there is a "next page" with the next page URL
+    private func processSpeciesRequest(data: Data?, error: Error?, completion: @escaping (SpeciesResult, URL?) -> Void ) {
+        guard let jsonData = data else {
+            completion(.failure(error!), nil)
+            return
+        }
+        
+        //The following request is made in the background queue
+        //beacuse it's an expensive task
+        
+        //create a background context
+        persistentContainer.performBackgroundTask { (context) in
+            
+            //still convert the json data
+            let result = SWAPI.species(fromJSON: jsonData, into: context)
+            
+            let specieResult = result.0
+            let nextURL = result.1
+            
+            //try to save the context (still the background)
+            do {
+                try context.save()
+            } catch {
+                print("Error saving the Core Data: \(error).")
+                completion(.failure(error), nil)
+                return
+            }
+            
+            //now we need to bring the context result into the main queue
+            //to do that we extract the object identifier for each entity in the bg queue
+            //than we create a reference with the entities in the main queue
+            //and we call the completion closure on the referenced entities
+            //of the main queue
+            
+            switch specieResult {
+            case let .success(species):
+                let specieIDs = species.map { return $0.objectID }
+                let viewContext = self.persistentContainer.viewContext
+                let viewContextSpecies =  specieIDs.map { return viewContext.object(with: $0) } as! [Specie]
+                completion(.success(viewContextSpecies), nextURL)
+            case .failure:
+                completion(specieResult, nextURL)
+            }
+        }
+    }
+
+    
+    //--------------------
+    //MARK: -  Starhsips Methods
+    //--------------------
+    
+    ///Fetch all starships from CoreData
+    func fetchAllStarshipsFromDB(completition: @escaping (StarshipsResult) -> Void) {
+        let fetchRequest: NSFetchRequest<Starship> = Starship.fetchRequest()
+        let sortByName = NSSortDescriptor(key: #keyPath(Starship.name), ascending: true)
+        fetchRequest.sortDescriptors = [sortByName]
+        
+        let viewContext = persistentContainer.viewContext
+        viewContext.perform {
+            do {
+                let allStarships = try viewContext.fetch(fetchRequest)
+                completition(.success(allStarships))
+            } catch {
+                completition(.failure(error))
+            }
+        }
+    }
+    
+    
+    ///Fetch all the starships from the web Service (SWAPI)
+    func fetchAllStarshipsFromAPI(fromURL url:URL? = nil, completion: @escaping (StarshipsResult) -> Void) {
+        let request: URLRequest
+        if let url = url {
+            //Make a request with the url passed through
+            request = URLRequest(url: url)
+        } else {
+            //Make a request with the SWAPI url
+            let url = SWAPI.allStarshipsURL
+            request = URLRequest(url: url)
+        }
+        
+        //create an istance of URLSessionTask
+        //by giving the session a request and a completion closure
+        let task = session.dataTask(with: request) {
+            (data, response, error) -> Void in
+            
+            let res = response as! HTTPURLResponse
+            
+            //Debug outputs
+            print(res.statusCode)
+            //----
+            
+            self.processStarshipsRequest(data: data, error: error) { (result, NextPageURL) in
+                OperationQueue.main.addOperation {
+                    //if there is a next page
+                    if let url = NextPageURL {
+                        //make another request with the next page url
+                        self.fetchAllStarshipsFromAPI(fromURL: url, completion: completion)
+                    }
+                    completion(result)
+                }
+            }
+        }
+        //start the web service request
+        task.resume()
+    }
+    
+    
+    
+    
+    ///Process the request to the API, returns a StarshipsResult object and an URL if there is a "next page" with the next page URL
+    private func processStarshipsRequest(data: Data?, error: Error?, completion: @escaping (StarshipsResult, URL?) -> Void ) {
+        guard let jsonData = data else {
+            completion(.failure(error!), nil)
+            return
+        }
+        
+        //The following request is made in the background queue
+        //beacuse it's an expensive task
+        
+        //create a background context
+        persistentContainer.performBackgroundTask { (context) in
+            
+            //still convert the json data
+            let result = SWAPI.starships(fromJSON: jsonData, into: context)
+            
+            let starshipResult = result.0
+            let nextURL = result.1
+            
+            //try to save the context (still the background)
+            do {
+                try context.save()
+            } catch {
+                print("Error saving the Core Data: \(error).")
+                completion(.failure(error), nil)
+                return
+            }
+            
+            //now we need to bring the context result into the main queue
+            //to do that we extract the object identifier for each entity in the bg queue
+            //than we create a reference with the entities in the main queue
+            //and we call the completion closure on the referenced entities
+            //of the main queue
+            
+            switch starshipResult {
+            case let .success(starships):
+                let starshipIDs = starships.map { return $0.objectID }
+                let viewContext = self.persistentContainer.viewContext
+                let viewContextStarships =  starshipIDs.map { return viewContext.object(with: $0) } as! [Starship]
+                completion(.success(viewContextStarships), nextURL)
+            case .failure:
+                completion(starshipResult, nextURL)
+            }
+        }
+    }
+    
+    //--------------------
+    //MARK: -  Vehicles Methods
+    //--------------------
+    
+    ///Fetch all vehicles from CoreData
+    func fetchAllVehiclesFromDB(completition: @escaping (VehiclesResult) -> Void) {
+        let fetchRequest: NSFetchRequest<Vehicle> = Vehicle.fetchRequest()
+        let sortByName = NSSortDescriptor(key: #keyPath(Vehicle.name), ascending: true)
+        fetchRequest.sortDescriptors = [sortByName]
+        
+        let viewContext = persistentContainer.viewContext
+        viewContext.perform {
+            do {
+                let allVehicles = try viewContext.fetch(fetchRequest)
+                completition(.success(allVehicles))
+            } catch {
+                completition(.failure(error))
+            }
+        }
+    }
+    
+    
+    ///Fetch all the vehicles from the web Service (SWAPI)
+    func fetchAllVehiclesFromAPI(fromURL url:URL? = nil, completion: @escaping (VehiclesResult) -> Void) {
+        let request: URLRequest
+        if let url = url {
+            //Make a request with the url passed through
+            request = URLRequest(url: url)
+        } else {
+            //Make a request with the SWAPI url
+            let url = SWAPI.allVehiclesURL
+            request = URLRequest(url: url)
+        }
+        
+        //create an istance of URLSessionTask
+        //by giving the session a request and a completion closure
+        let task = session.dataTask(with: request) {
+            (data, response, error) -> Void in
+            
+            let res = response as! HTTPURLResponse
+            
+            //Debug outputs
+            print(res.statusCode)
+            //----
+            
+            self.processVehiclesRequest(data: data, error: error) { (result, NextPageURL) in
+                OperationQueue.main.addOperation {
+                    //if there is a next page
+                    if let url = NextPageURL {
+                        //make another request with the next page url
+                        self.fetchAllVehiclesFromAPI(fromURL: url, completion: completion)
+                    }
+                    completion(result)
+                }
+            }
+        }
+        //start the web service request
+        task.resume()
+    }
+    
+    
+    
+    
+    ///Process the request to the API, returns a VehiclesResult object and an URL if there is a "next page" with the next page URL
+    private func processVehiclesRequest(data: Data?, error: Error?, completion: @escaping (VehiclesResult, URL?) -> Void ) {
+        guard let jsonData = data else {
+            completion(.failure(error!), nil)
+            return
+        }
+        
+        //The following request is made in the background queue
+        //beacuse it's an expensive task
+        
+        //create a background context
+        persistentContainer.performBackgroundTask { (context) in
+            
+            //still convert the json data
+            let result = SWAPI.vehicles(fromJSON: jsonData, into: context)
+            
+            let vehicleResult = result.0
+            let nextURL = result.1
+            
+            //try to save the context (still the background)
+            do {
+                try context.save()
+            } catch {
+                print("Error saving the Core Data: \(error).")
+                completion(.failure(error), nil)
+                return
+            }
+            
+            //now we need to bring the context result into the main queue
+            //to do that we extract the object identifier for each entity in the bg queue
+            //than we create a reference with the entities in the main queue
+            //and we call the completion closure on the referenced entities
+            //of the main queue
+            
+            switch vehicleResult {
+            case let .success(vehicles):
+                let vehicleIDs = vehicles.map { return $0.objectID }
+                let viewContext = self.persistentContainer.viewContext
+                let viewContextVehicles =  vehicleIDs.map { return viewContext.object(with: $0) } as! [Vehicle]
+                completion(.success(viewContextVehicles), nextURL)
+            case .failure:
+                completion(vehicleResult, nextURL)
+            }
+        }
+    }
     
     //--------------------
     //MARK: - Helpers
