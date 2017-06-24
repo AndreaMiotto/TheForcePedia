@@ -46,6 +46,13 @@ class LandingViewController: UITableViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Add a background view to the table view
+        let imageView = UIImageView(image: #imageLiteral(resourceName: "bg_blurred"))
+        self.tableView.backgroundView = imageView
+    }
+    
     
     //--------------------
     //MARK: - Methods

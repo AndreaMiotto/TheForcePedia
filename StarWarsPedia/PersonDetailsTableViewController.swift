@@ -45,6 +45,13 @@ class PersonDetailsTableViewController: UITableViewController {
         updateConnections()
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Add a background view to the table view
+        let imageView = UIImageView(image: #imageLiteral(resourceName: "bg_blurred"))
+        self.tableView.backgroundView = imageView
+    }
 
     //--------------------
     //MARK: - Table View Methods
@@ -63,6 +70,12 @@ class PersonDetailsTableViewController: UITableViewController {
         case 3: return starships.count
         case 4: return vehicles.count
         default: return 0
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view:UIView, forSection: Int) {
+        if let headerTitle = view as? UITableViewHeaderFooterView {
+            headerTitle.textLabel?.textColor = UIColor.orange
         }
     }
     
