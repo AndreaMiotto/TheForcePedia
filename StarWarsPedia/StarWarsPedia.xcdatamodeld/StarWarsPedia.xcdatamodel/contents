@@ -86,13 +86,15 @@
     <entity name="Vehicle" representedClassName="Vehicle" syncable="YES" codeGenerationType="class">
         <attribute name="cargo_capacity" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="consumables" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="crew" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="cost_in_credits" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="crew" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="edited" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="length" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="manufacturer" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="max_atmosphering_speed" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="model" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="passengers" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="passengers" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="vehicle_class" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="films" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Film" inverseName="vehicles" inverseEntity="Film" syncable="YES"/>
@@ -104,6 +106,6 @@
         <element name="Planet" positionX="-378" positionY="-312" width="128" height="255"/>
         <element name="Specie" positionX="-684" positionY="-255" width="128" height="255"/>
         <element name="Starship" positionX="-18" positionY="81" width="128" height="300"/>
-        <element name="Vehicle" positionX="-243" positionY="45" width="128" height="240"/>
+        <element name="Vehicle" positionX="-243" positionY="45" width="128" height="270"/>
     </elements>
 </model>
