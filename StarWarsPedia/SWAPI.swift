@@ -148,6 +148,7 @@ struct SWAPI {
             let heightString = json["height"] as? String,
             let massString = json["mass"] as? String,
             let editedString = json["edited"] as? String,
+            let edited = dateFormatterISO8601.date(from: editedString),
             let url = json["url"] as? String else {
                 
                 //Don't have enough information to construct a Person
@@ -164,8 +165,8 @@ struct SWAPI {
         context.performAndWait {
             fetchedPersons = try? fetchRequest.execute()
         }
-        //The person already exist in Core Data?
-        if let existingPerson = fetchedPersons?.first {
+        //The person already exist in Core Data? Does it have the same edited date?
+        if let existingPerson = fetchedPersons?.first, existingPerson.edited == (edited as NSDate) {
             //Yes, so return it
             return existingPerson
         }
@@ -190,9 +191,9 @@ struct SWAPI {
                 person.mass = mass
             }
             
-            if let edited = dateFormatterISO8601.date(from: editedString) {
-                person.edited = edited as NSDate
-            }
+            
+            person.edited = edited as NSDate
+            
         }
         return person
     }
@@ -251,6 +252,7 @@ struct SWAPI {
             let director = json["director"] as? String,
             let episode_id = json["episode_id"] as? Int16,
             let editedString = json["edited"] as? String,
+            let edited = dateFormatterISO8601.date(from: editedString),
             let release_dateString = json["release_date"] as? String else {
                 
                 //Don't have enough information to construct a film
@@ -267,8 +269,8 @@ struct SWAPI {
         context.performAndWait {
             fetchedFilms = try? fetchRequest.execute()
         }
-        //The film already exist in Core Data?
-        if let existingFilm = fetchedFilms?.first {
+        //The film already exist in Core Data? Does it have the same edited date?
+        if let existingFilm = fetchedFilms?.first, existingFilm.edited == (edited as NSDate)  {
             //yes, so return it
             return existingFilm
         }
@@ -286,9 +288,9 @@ struct SWAPI {
             
             film.episode_id = episode_id
             
-            if let edited = dateFormatterISO8601.date(from: editedString) {
-                film.edited = edited as NSDate
-            }
+            
+            film.edited = edited as NSDate
+            
             
             if let release_date = dateFormatterISO8601.date(from: release_dateString) {
                 film.release_date = release_date as NSDate
@@ -354,6 +356,7 @@ struct SWAPI {
             let rotation_periodString = json["rotation_period"] as? String,
             let surface_waterString = json["surface_water"] as? String,
             let editedString = json["edited"] as? String,
+            let edited = dateFormatterISO8601.date(from: editedString),
             let url = json["url"] as? String else {
                 
                 //Don't have enough information to construct a Planet
@@ -370,8 +373,8 @@ struct SWAPI {
         context.performAndWait {
             fetchedPlanets = try? fetchRequest.execute()
         }
-        //The planet already exist in Core Data?
-        if let existingPlanet = fetchedPlanets?.first {
+        //The planet already exist in Core Data? Does it have the same edited date?
+        if let existingPlanet = fetchedPlanets?.first, existingPlanet.edited == (edited as NSDate) {
             //Yes, so return it
             return existingPlanet
         }
@@ -405,9 +408,9 @@ struct SWAPI {
                 planet.surface_water = surface_water
             }
             
-            if let edited = dateFormatterISO8601.date(from: editedString) {
-                planet.edited = edited as NSDate
-            }
+            
+            planet.edited = edited as NSDate
+            
         }
         return planet
     }
@@ -468,6 +471,7 @@ struct SWAPI {
             let avarage_heightString = json["average_height"] as? String,
             let avarage_lifespanString = json["average_lifespan"] as? String,
             let editedString = json["edited"] as? String,
+            let edited = dateFormatterISO8601.date(from: editedString),
             let url = json["url"] as? String else {
                 
                 //Don't have enough information to construct a Specie
@@ -484,8 +488,8 @@ struct SWAPI {
         context.performAndWait {
             fetchedSpecies = try? fetchRequest.execute()
         }
-        //The specie already exist in Core Data?
-        if let existingSpecie = fetchedSpecies?.first {
+        //The specie already exist in Core Data? Does it have the same edited date?
+        if let existingSpecie = fetchedSpecies?.first, existingSpecie.edited == (edited as NSDate) {
             //Yes, so return it
             return existingSpecie
         }
@@ -511,9 +515,9 @@ struct SWAPI {
                 specie.average_lifespan = avarage_lifespan
             }
             
-            if let edited = dateFormatterISO8601.date(from: editedString) {
-                specie.edited = edited as NSDate
-            }
+            
+            specie.edited = edited as NSDate
+            
         }
         return specie
     }
@@ -578,6 +582,7 @@ struct SWAPI {
             let max_atmosphering_speedString = json["max_atmosphering_speed"] as? String,
             let passengersString = json["passengers"] as? String,
             let editedString = json["edited"] as? String,
+            let edited = dateFormatterISO8601.date(from: editedString),
             let url = json["url"] as? String else {
                 
                 //Don't have enough information to construct a Starship
@@ -594,8 +599,8 @@ struct SWAPI {
         context.performAndWait {
             fetchedStarships = try? fetchRequest.execute()
         }
-        //The starship already exist in Core Data?
-        if let existingStarship = fetchedStarships?.first {
+        //The starship already exist in Core Data? Does it have the same edited date?
+        if let existingStarship = fetchedStarships?.first, existingStarship.edited == (edited as NSDate) {
             //Yes, so return it
             return existingStarship
         }
@@ -632,9 +637,9 @@ struct SWAPI {
                 starship.passengers = passengers
             }
             
-            if let edited = dateFormatterISO8601.date(from: editedString) {
-                starship.edited = edited as NSDate
-            }
+
+            starship.edited = edited as NSDate
+            
         }
         return starship
     }
@@ -697,7 +702,8 @@ struct SWAPI {
             let max_atmosphering_speedString = json["max_atmosphering_speed"] as? String,
             let passengersString = json["passengers"] as? String,
             let url = json["url"] as? String,
-            let editedString = json["edited"] as? String else {
+            let editedString = json["edited"] as? String,
+            let edited = dateFormatterISO8601.date(from: editedString) else {
                 
                 //Don't have enough information to construct a Vehicle
                 print("Don't have enough information to construct a Vehicle")
@@ -713,8 +719,8 @@ struct SWAPI {
         context.performAndWait {
             fetchedVehicles = try? fetchRequest.execute()
         }
-        //The vehicle already exist in Core Data?
-        if let existingVehicle = fetchedVehicles?.first {
+        //The vehicle already exist in Core Data? Does it have the same edited date?
+        if let existingVehicle = fetchedVehicles?.first, existingVehicle.edited == (edited as NSDate) {
             //Yes, so return it
             return existingVehicle
         }
@@ -749,9 +755,9 @@ struct SWAPI {
             if let passengers = Int32(passengersString) {
                 vehicle.passengers = passengers
             }
-            if let edited = dateFormatterISO8601.date(from: editedString) {
-                vehicle.edited = edited as NSDate
-            }
+            
+            vehicle.edited = edited as NSDate
+            
  
         }
         return vehicle
