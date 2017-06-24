@@ -25,6 +25,7 @@
 		0182B0711EFE6482004C02F8 /* PersonDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0182B0701EFE6482004C02F8 /* PersonDetailsTableViewController.swift */; };
 		0182B0781EFE9F02004C02F8 /* Person+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0182B0761EFE9F02004C02F8 /* Person+CoreDataClass.swift */; };
 		0182B0791EFE9F02004C02F8 /* Person+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0182B0771EFE9F02004C02F8 /* Person+CoreDataProperties.swift */; };
+		0182B07B1EFEBB41004C02F8 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0182B07A1EFEBB41004C02F8 /* WebViewController.swift */; };
 		01E839E71EE30CF00044DFAA /* StarWarsPedia.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01E839E51EE30CF00044DFAA /* StarWarsPedia.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +71,7 @@
 		0182B0701EFE6482004C02F8 /* PersonDetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonDetailsTableViewController.swift; sourceTree = "<group>"; };
 		0182B0761EFE9F02004C02F8 /* Person+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataClass.swift"; sourceTree = "<group>"; };
 		0182B0771EFE9F02004C02F8 /* Person+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		0182B07A1EFEBB41004C02F8 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		01E839E61EE30CF00044DFAA /* StarWarsPedia.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StarWarsPedia.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -189,6 +191,7 @@
 				0182B06C1EFD875A004C02F8 /* StarshipsTableViewController.swift */,
 				0182B06E1EFD8773004C02F8 /* VehiclesTableViewController.swift */,
 				0182B0701EFE6482004C02F8 /* PersonDetailsTableViewController.swift */,
+				0182B07A1EFEBB41004C02F8 /* WebViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -343,6 +346,7 @@
 				0182B0711EFE6482004C02F8 /* PersonDetailsTableViewController.swift in Sources */,
 				0182B0781EFE9F02004C02F8 /* Person+CoreDataClass.swift in Sources */,
 				0154CF441EE303580017900E /* AppDelegate.swift in Sources */,
+				0182B07B1EFEBB41004C02F8 /* WebViewController.swift in Sources */,
 				017797241EF6DDFD00AEC310 /* PersonsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

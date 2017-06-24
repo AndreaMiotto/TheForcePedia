@@ -235,7 +235,6 @@ class PersonDetailsTableViewController: UITableViewController {
             fetchRequest.predicate = predicate
             
             var fetchedFilms: [Film]?
-            
             let context = store.persistentContainer.viewContext
             
             //make the request
@@ -272,7 +271,6 @@ class PersonDetailsTableViewController: UITableViewController {
             fetchRequest.predicate = predicate
             
             var fetchedSpecies: [Specie]?
-            
             let context = store.persistentContainer.viewContext
             
             //make the request
@@ -308,7 +306,6 @@ class PersonDetailsTableViewController: UITableViewController {
             fetchRequest.predicate = predicate
             
             var fetchedVehicles: [Vehicle]?
-            
             let context = store.persistentContainer.viewContext
             
             //make the request
@@ -344,7 +341,6 @@ class PersonDetailsTableViewController: UITableViewController {
             fetchRequest.predicate = predicate
             
             var fetchedStarships: [Starship]?
-            
             let context = store.persistentContainer.viewContext
             
             //make the request
@@ -364,5 +360,24 @@ class PersonDetailsTableViewController: UITableViewController {
             }
         }
     }
+    
+    //--------------------
+    //MARK: - Actions
+    //--------------------
+    
+    
+    ///Display images for the resource through google images
+    @IBAction func searchImages(_ sender: UIBarButtonItem) {
+        guard  let name = person.name else {
+            return
+        }
+        //presenting the web view controller
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let webViewController = storyboard.instantiateViewController(withIdentifier: "webViewController") as! WebViewController
+        webViewController.stringToSearch = name
+        self.present(webViewController, animated: true, completion: nil)
+    }
+    
+    
 
 }
