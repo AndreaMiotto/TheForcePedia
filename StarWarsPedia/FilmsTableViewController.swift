@@ -71,17 +71,19 @@ class FilmsTableViewController: UITableViewController {
     }
     
     
-    /*
+    
      //--------------------
      // MARK: - Navigation
      //--------------------
      
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
+        //Edit the back button title displayed in the next vc
+        let backItem = UIBarButtonItem()
+        backItem.title = ""
+        navigationItem.backBarButtonItem = backItem
+
      }
-     */
+ 
     
     //--------------------
     //MARK: - Methods

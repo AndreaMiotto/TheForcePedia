@@ -60,6 +60,13 @@ class LandingViewController: UITableViewController {
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        //Edit the back button title displayed in the next vc
+        let backItem = UIBarButtonItem()
+        backItem.title = ""
+        navigationItem.backBarButtonItem = backItem
+
+        
         switch segue.identifier {
         case "showPersons"?:
             let destinationVC = segue.destination as! PersonsTableViewController

@@ -307,7 +307,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Character" id="2cm-Zt-C9g">
                         <barButtonItem key="backBarButtonItem" title=" " id="Wqd-Tc-zZN"/>
-                        <barButtonItem key="rightBarButtonItem" title="Images" id="hNU-td-H4x">
+                        <barButtonItem key="rightBarButtonItem" image="images_ico" id="hNU-td-H4x">
                             <connections>
                                 <action selector="searchImages:" destination="93x-1S-QB9" id="eTw-Ur-UC5"/>
                             </connections>
@@ -331,12 +331,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DR4-1W-EFT">
+                            <navigationBar contentMode="scaleToFill" barStyle="black" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DR4-1W-EFT">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="barTintColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </textAttributes>
                                 <items>
                                     <navigationItem title="Search Images" id="WPP-bu-y1L">
-                                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="done" id="izr-ec-QMo">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="izr-ec-QMo">
+                                            <color key="tintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
                                                 <action selector="searchDone:" destination="6ZG-Lx-gPH" id="pf6-At-j2A"/>
                                             </connections>
@@ -349,7 +354,7 @@
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </webView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="FuN-Mm-cii" firstAttribute="top" secondItem="DR4-1W-EFT" secondAttribute="bottom" id="B0I-b9-HOP"/>
                             <constraint firstAttribute="trailing" secondItem="DR4-1W-EFT" secondAttribute="trailing" id="Mre-Jj-q7a"/>
@@ -529,10 +534,11 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="FVr-57-s92" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="667"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="m1f-oC-3SN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -545,4 +551,7 @@
             <point key="canvasLocation" x="76" y="29.23538230884558"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="images_ico" width="25" height="23"/>
+    </resources>
 </document>
