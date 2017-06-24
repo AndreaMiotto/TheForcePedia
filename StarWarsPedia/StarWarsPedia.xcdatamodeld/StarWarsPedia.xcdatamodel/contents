@@ -22,6 +22,7 @@
         <attribute name="gender" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="hair_color" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="height" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="homeworld_url" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="mass" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="skin_color" optional="YES" attributeType="String" syncable="YES"/>
@@ -102,7 +103,7 @@
     </entity>
     <elements>
         <element name="Film" positionX="-36" positionY="-222" width="128" height="240"/>
-        <element name="Person" positionX="-720" positionY="81" width="128" height="270"/>
+        <element name="Person" positionX="-720" positionY="81" width="128" height="285"/>
         <element name="Planet" positionX="-378" positionY="-312" width="128" height="255"/>
         <element name="Specie" positionX="-684" positionY="-255" width="128" height="255"/>
         <element name="Starship" positionX="-18" positionY="81" width="128" height="300"/>

@@ -149,6 +149,7 @@ struct SWAPI {
             let massString = json["mass"] as? String,
             let editedString = json["edited"] as? String,
             let edited = dateFormatterISO8601.date(from: editedString),
+            let homeworld_url = json["homeworld"] as? String,
             let url = json["url"] as? String else {
                 
                 //Don't have enough information to construct a Person
@@ -183,6 +184,7 @@ struct SWAPI {
             person.gender = gender
             person.hair_color = hair_color
             person.skin_color = skin_color
+            person.homeworld_url = homeworld_url
             
             if let height = Double(heightString) {
                 person.height = height

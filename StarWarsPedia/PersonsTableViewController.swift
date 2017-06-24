@@ -63,17 +63,26 @@ class PersonsTableViewController: UITableViewController {
     }
     
 
-    /*
+    
     //--------------------
     // MARK: - Navigation
     //--------------------
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        switch segue.identifier {
+        case "showPersonDetails"?:
+            if let selectedIndexPath = tableView.indexPathsForSelectedRows?.first {
+                let person = persons[selectedIndexPath.row]
+                let destinationVC = segue.destination as! PersonDetailsTableViewController
+                destinationVC.person = person
+                destinationVC.store = store
+            }
+
+        default:
+            preconditionFailure("Unexpected segue identifier.")
+        }
     }
-    */
+
     
     //--------------------
     //MARK: - Methods
