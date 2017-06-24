@@ -182,7 +182,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MM7-hB-Xw3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1049" y="-772"/>
+            <point key="canvasLocation" x="2073" y="-950"/>
         </scene>
         <!--Characters-->
         <scene sceneID="CpM-gS-UOP">
@@ -213,7 +213,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bxA-c8-8nN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1825" y="-269"/>
+            <point key="canvasLocation" x="2073" y="-269"/>
         </scene>
         <!--Character Name-->
         <scene sceneID="Szh-cs-s2v">
@@ -234,14 +234,14 @@
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="z98-Gh-X9S">
                                             <rect key="frame" x="15" y="14" width="91" height="16"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ywS-4V-vrk">
                                             <rect key="frame" x="112" y="14" width="35" height="16"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -258,7 +258,7 @@
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9mC-TT-eHF">
                                             <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -284,7 +284,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X4J-Vt-S2P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2633" y="-276"/>
+            <point key="canvasLocation" x="3918" y="-269"/>
         </scene>
         <!--Web View Controller-->
         <scene sceneID="Kaf-Xd-EHl">
@@ -333,7 +333,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2672.8000000000002" y="423.23838080959524"/>
+            <point key="canvasLocation" x="76" y="-772"/>
         </scene>
         <!--Films-->
         <scene sceneID="FW4-ag-caa">
@@ -361,7 +361,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6fB-a7-prp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1825" y="425"/>
+            <point key="canvasLocation" x="2073" y="417"/>
         </scene>
         <!--Starships-->
         <scene sceneID="E5h-pB-o7w">
@@ -389,7 +389,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="us9-WV-FBq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="199" y="1015"/>
+            <point key="canvasLocation" x="233" y="1182"/>
         </scene>
         <!--Species-->
         <scene sceneID="OQM-J0-7uQ">
@@ -417,7 +417,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g1W-Q5-PoV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1096" y="1051"/>
+            <point key="canvasLocation" x="1015" y="1182"/>
         </scene>
         <!--Planets-->
         <scene sceneID="muS-pc-aV6">
@@ -445,7 +445,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="62b-bq-0v9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1829" y="1084"/>
+            <point key="canvasLocation" x="1777" y="1182"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="BKI-wO-bsp">
