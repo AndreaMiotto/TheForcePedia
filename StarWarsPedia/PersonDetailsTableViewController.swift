@@ -23,6 +23,11 @@ class PersonDetailsTableViewController: UITableViewController {
     var person: Person!
     var store: DataStore!
     
+    var films: [Film] = []
+    var species: [Specie] = []
+    var vehicles: [Vehicle] = []
+    var starships: [Starship] = []
+    
     //--------------------
     //MARK: - View's Methods
     //--------------------
@@ -32,6 +37,13 @@ class PersonDetailsTableViewController: UITableViewController {
         super.viewDidLoad()
         
         self.title = person.name
+        films = person.films?.allObjects as! [Film]
+        species = person.species?.allObjects as! [Specie]
+        vehicles = person.vehicles?.allObjects as! [Vehicle]
+        starships = person.starships?.allObjects as! [Starship]
+        
+        updateConnections()
+        
     }
 
     //--------------------
@@ -40,12 +52,16 @@ class PersonDetailsTableViewController: UITableViewController {
     
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return 5
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0: return 8
+        case 1: return species.count
+        case 2: return films.count
+        case 3: return starships.count
+        case 4: return vehicles.count
         default: return 0
         }
     }
@@ -53,10 +69,11 @@ class PersonDetailsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0: return "Details"
-        case 1: return "Films"
-        case 2: return "Starships"
-        case 3: return "Vehicles"
-        default: return "section header"
+        case 1: return "Species"
+        case 2: return "Films"
+        case 3: return "Starships"
+        case 4: return "Vehicles"
+        default: return "Section Header"
         }
     }
 
@@ -67,10 +84,22 @@ class PersonDetailsTableViewController: UITableViewController {
         switch indexPath.section {
         case 0:
             cell = buildCellForDetails(withRowIndex: indexPath.row)
+        case 1:
+            cell = tableView.dequeueReusableCell(withIdentifier: "basicCell", for: indexPath)
+            cell.textLabel?.text = species[indexPath.row].name
+        case 2:
+            cell = tableView.dequeueReusableCell(withIdentifier: "basicCell", for: indexPath)
+            cell.textLabel?.text = films[indexPath.row].title
+        case 3:
+            cell = tableView.dequeueReusableCell(withIdentifier: "basicCell", for: indexPath)
+            cell.textLabel?.text = starships[indexPath.row].name
+        case 4:
+            cell = tableView.dequeueReusableCell(withIdentifier: "basicCell", for: indexPath)
+            cell.textLabel?.text = vehicles[indexPath.row].name
         default:
-            cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: "basicCell", for: indexPath)
+            cell.textLabel?.text = "Unknown Cell"
         }
-
         return cell
     }
     
@@ -81,66 +110,62 @@ class PersonDetailsTableViewController: UITableViewController {
     
     func buildCellForDetails(withRowIndex index: Int) -> UITableViewCell {
         
-        let reuseIdentifier = "rightDetailCell"
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) ?? UITableViewCell(style: .value1, reuseIdentifier: reuseIdentifier)
+        let reuseIdentifier = "leftDetailCell"
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) ?? UITableViewCell(style: .value2, reuseIdentifier: reuseIdentifier)
         switch index {
         case 0:
-            cell.textLabel?.text = "Birth Year"
+            cell.textLabel?.text = "Birth Year:"
             if let birthYear = person.birth_year {
                 cell.detailTextLabel?.text = birthYear
             } else {
                 cell.detailTextLabel?.text = "unknown"
             }
         case 1:
-            cell.textLabel?.text = "Gender"
+            cell.textLabel?.text = "Gender:"
             if let gender = person.gender {
                 cell.detailTextLabel?.text = gender
             } else {
                 cell.detailTextLabel?.text = "unknown"
             }
         case 2:
-            cell.textLabel?.text = "Homeworld"
+            cell.textLabel?.text = "Homeworld:"
             //if the person has a connection with an homeworld
             if let homeworld = person.homeworld {
                 cell.detailTextLabel?.text = homeworld.name
-            //if not, try to make the connection
-            } else if createPlanetConnection(fromPerson: person, toPlanet: person.homeworld_url) {
-                let indexPath = IndexPath(row: index, section: 0)
-                tableView.reloadRows(at: [indexPath] , with: .automatic)
-            //if the connection fails, just print unknown
+            //if not print unknown
             } else {
                 cell.detailTextLabel?.text = "unknown"
             }
         case 3:
-            cell.textLabel?.text = "Height"
+            cell.textLabel?.text = "Height:"
             if person.height != 0 {
                 cell.detailTextLabel?.text = "\(person.height)"
             } else {
                 cell.detailTextLabel?.text = "unknown"
             }
         case 4:
-            cell.textLabel?.text = "Mass"
+            cell.textLabel?.text = "Mass:"
             if person.mass != 0 {
                 cell.detailTextLabel?.text = "\(person.mass)"
             } else {
                 cell.detailTextLabel?.text = "unknown"
             }
         case 5:
-            cell.textLabel?.text = "Eye color"
+            cell.textLabel?.text = "Eye color:"
             if let eyeColor = person.eye_color {
                 cell.detailTextLabel?.text = eyeColor
             } else {
                 cell.detailTextLabel?.text = "unknown"
             }
         case 6:
-            cell.textLabel?.text = "Hair color"
+            cell.textLabel?.text = "Hair color:"
             if let hairColor = person.hair_color {
                 cell.detailTextLabel?.text = hairColor
             } else {
                 cell.detailTextLabel?.text = "unknown"
             }
         case 7:
-            cell.textLabel?.text = "Skin color"
+            cell.textLabel?.text = "Skin color:"
             if let skinColor = person.skin_color {
                 cell.detailTextLabel?.text = skinColor
             } else {
@@ -152,11 +177,21 @@ class PersonDetailsTableViewController: UITableViewController {
         
     }
     
-    ///Return true if the connection has been made, false otherwise.
-    func createPlanetConnection(fromPerson person: Person, toPlanet planet: String?) ->  Bool {
+    ///make all the connections for the selected resource
+    func updateConnections() {
+        self.createPlanetConnection(fromPerson: person, toPlanet: person.homeworld_url)
+        self.createFilmsConnection(fromPerson: person, toFilms: person.film_urls)
+        self.createSpeciesConnection(fromPerson: person, toSpecies: person.specie_urls)
+        self.createStarshipsConnection(fromPerson: person, toStarships: person.starship_urls)
+        self.createVehiclesConnection(fromPerson: person, toVehicles: person.vehicles_url)
+        tableView.reloadData()
+    }
+    
+    ///make the connections between the person and the homeworld planet
+    func createPlanetConnection(fromPerson person: Person, toPlanet planet: String?) {
         //check if the planet url is empty
         guard let url = planet else {
-            return false
+            return
         }
         
         //Create the fetch request for the planet
@@ -165,7 +200,6 @@ class PersonDetailsTableViewController: UITableViewController {
         fetchRequest.predicate = predicate
         
         var fetchedPlanets: [Planet]?
-        
         let context = store.persistentContainer.viewContext
         
         //make the request
@@ -181,14 +215,154 @@ class PersonDetailsTableViewController: UITableViewController {
                 try context.save()
             } catch let error {
                 print("Impossible to make connection: \(error)")
-                return false
+                return
             }
-            
-            //return treu
-            return true
         }
-        //No, so create it and we return it
-        return false
-            
     }
+    
+    ///make the connections between the person and the films
+    func createFilmsConnection(fromPerson person: Person, toFilms films: [String]?) {
+        //check if the films array url is empty
+        guard let urls = films else {
+            return
+        }
+        //for each film url
+        for url in urls {
+        
+            //Create the fetch request for the film
+            let fetchRequest: NSFetchRequest<Film> = Film.fetchRequest()
+            let predicate = NSPredicate(format: "\(#keyPath(Film.url)) == %@", url)
+            fetchRequest.predicate = predicate
+            
+            var fetchedFilms: [Film]?
+            
+            let context = store.persistentContainer.viewContext
+            
+            //make the request
+            context.performAndWait {
+                fetchedFilms = try? fetchRequest.execute()
+            }
+            //is there a film with the same url in the core data?
+            if let existingFilm = fetchedFilms?.first {
+                //Yes, make the connection
+                person.films?.adding(existingFilm)
+                self.films.append(existingFilm)
+                do {
+                    try context.save()
+                } catch let error {
+                    print("Impossible to make connection: \(error)")
+                }
+            }
+        }
+    }
+    
+    
+    ///make the connections between the person and the species
+    func createSpeciesConnection(fromPerson person: Person, toSpecies species: [String]?) {
+        //check if the films array url is empty
+        guard let urls = species else {
+            return
+        }
+        //for each species url
+        for url in urls {
+            
+            //Create the fetch request for the specie
+            let fetchRequest: NSFetchRequest<Specie> = Specie.fetchRequest()
+            let predicate = NSPredicate(format: "\(#keyPath(Specie.url)) == %@", url)
+            fetchRequest.predicate = predicate
+            
+            var fetchedSpecies: [Specie]?
+            
+            let context = store.persistentContainer.viewContext
+            
+            //make the request
+            context.performAndWait {
+                fetchedSpecies = try? fetchRequest.execute()
+            }
+            //is there a film with the same url in the core data?
+            if let existingSpecie = fetchedSpecies?.first {
+                //Yes, make the connection
+                person.species?.adding(existingSpecie)
+                self.species.append(existingSpecie)
+                do {
+                    try context.save()
+                } catch let error {
+                    print("Impossible to make connection: \(error)")
+                }
+            }
+        }
+    }
+    
+    ///make the connections between the person and the vehicles
+    func createVehiclesConnection(fromPerson person: Person, toVehicles vehicles: [String]?) {
+        //check if the films array url is empty
+        guard let urls = vehicles else {
+            return
+        }
+        //for each vehicles url
+        for url in urls {
+            
+            //Create the fetch request for the vehicle
+            let fetchRequest: NSFetchRequest<Vehicle> = Vehicle.fetchRequest()
+            let predicate = NSPredicate(format: "\(#keyPath(Vehicle.url)) == %@", url)
+            fetchRequest.predicate = predicate
+            
+            var fetchedVehicles: [Vehicle]?
+            
+            let context = store.persistentContainer.viewContext
+            
+            //make the request
+            context.performAndWait {
+                fetchedVehicles = try? fetchRequest.execute()
+            }
+            //is there a film with the same url in the core data?
+            if let existingVehicle = fetchedVehicles?.first {
+                //Yes, make the connection
+                person.vehicles?.adding(existingVehicle)
+                self.vehicles.append(existingVehicle)
+                do {
+                    try context.save()
+                } catch let error {
+                    print("Impossible to make connection: \(error)")
+                }
+            }
+        }
+    }
+    
+    ///make the connections between the person and the starships
+    func createStarshipsConnection(fromPerson person: Person, toStarships starships: [String]?) {
+        //check if the films array url is empty
+        guard let urls = starships else {
+            return
+        }
+        //for each starships url
+        for url in urls {
+            
+            //Create the fetch request for the starship
+            let fetchRequest: NSFetchRequest<Starship> = Starship.fetchRequest()
+            let predicate = NSPredicate(format: "\(#keyPath(Starship.url)) == %@", url)
+            fetchRequest.predicate = predicate
+            
+            var fetchedStarships: [Starship]?
+            
+            let context = store.persistentContainer.viewContext
+            
+            //make the request
+            context.performAndWait {
+                fetchedStarships = try? fetchRequest.execute()
+            }
+            //is there a film with the same url in the core data?
+            if let existingStarship = fetchedStarships?.first {
+                //Yes, make the connection
+                person.starships?.adding(existingStarship)
+                self.starships.append(existingStarship)
+                do {
+                    try context.save()
+                } catch let error {
+                    print("Impossible to make connection: \(error)")
+                }
+            }
+        }
+    }
+
 }

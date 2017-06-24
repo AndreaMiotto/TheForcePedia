@@ -23,6 +23,8 @@
 		0182B06D1EFD875A004C02F8 /* StarshipsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0182B06C1EFD875A004C02F8 /* StarshipsTableViewController.swift */; };
 		0182B06F1EFD8773004C02F8 /* VehiclesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0182B06E1EFD8773004C02F8 /* VehiclesTableViewController.swift */; };
 		0182B0711EFE6482004C02F8 /* PersonDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0182B0701EFE6482004C02F8 /* PersonDetailsTableViewController.swift */; };
+		0182B0781EFE9F02004C02F8 /* Person+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0182B0761EFE9F02004C02F8 /* Person+CoreDataClass.swift */; };
+		0182B0791EFE9F02004C02F8 /* Person+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0182B0771EFE9F02004C02F8 /* Person+CoreDataProperties.swift */; };
 		01E839E71EE30CF00044DFAA /* StarWarsPedia.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01E839E51EE30CF00044DFAA /* StarWarsPedia.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +68,8 @@
 		0182B06C1EFD875A004C02F8 /* StarshipsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarshipsTableViewController.swift; sourceTree = "<group>"; };
 		0182B06E1EFD8773004C02F8 /* VehiclesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehiclesTableViewController.swift; sourceTree = "<group>"; };
 		0182B0701EFE6482004C02F8 /* PersonDetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonDetailsTableViewController.swift; sourceTree = "<group>"; };
+		0182B0761EFE9F02004C02F8 /* Person+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataClass.swift"; sourceTree = "<group>"; };
+		0182B0771EFE9F02004C02F8 /* Person+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		01E839E61EE30CF00044DFAA /* StarWarsPedia.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StarWarsPedia.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -158,6 +162,8 @@
 		01E839E21EE30CCA0044DFAA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0182B0761EFE9F02004C02F8 /* Person+CoreDataClass.swift */,
+				0182B0771EFE9F02004C02F8 /* Person+CoreDataProperties.swift */,
 				01E839E51EE30CF00044DFAA /* StarWarsPedia.xcdatamodeld */,
 			);
 			name = Model;
@@ -324,6 +330,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0182B0791EFE9F02004C02F8 /* Person+CoreDataProperties.swift in Sources */,
 				01E839E71EE30CF00044DFAA /* StarWarsPedia.xcdatamodeld in Sources */,
 				0182B06D1EFD875A004C02F8 /* StarshipsTableViewController.swift in Sources */,
 				0172C4ED1EE7255500023650 /* DataStore.swift in Sources */,
@@ -334,6 +341,7 @@
 				0177971C1EF6C05E00AEC310 /* LandingViewController.swift in Sources */,
 				017797261EFAA83C00AEC310 /* FilmsTableViewController.swift in Sources */,
 				0182B0711EFE6482004C02F8 /* PersonDetailsTableViewController.swift in Sources */,
+				0182B0781EFE9F02004C02F8 /* Person+CoreDataClass.swift in Sources */,
 				0154CF441EE303580017900E /* AppDelegate.swift in Sources */,
 				017797241EF6DDFD00AEC310 /* PersonsTableViewController.swift in Sources */,
 			);

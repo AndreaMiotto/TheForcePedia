@@ -150,6 +150,10 @@ struct SWAPI {
             let editedString = json["edited"] as? String,
             let edited = dateFormatterISO8601.date(from: editedString),
             let homeworld_url = json["homeworld"] as? String,
+            let film_urls = json["films"] as? [String],
+            let starship_urls = json["starships"] as? [String],
+            let vehicle_urls = json["vehicles"] as? [String],
+            let specie_urls = json["species"] as? [String],
             let url = json["url"] as? String else {
                 
                 //Don't have enough information to construct a Person
@@ -185,6 +189,10 @@ struct SWAPI {
             person.hair_color = hair_color
             person.skin_color = skin_color
             person.homeworld_url = homeworld_url
+            person.film_urls = film_urls
+            person.vehicles_url = vehicle_urls
+            person.starship_urls = starship_urls
+            person.specie_urls = specie_urls
             
             if let height = Double(heightString) {
                 person.height = height
@@ -192,8 +200,6 @@ struct SWAPI {
             if let mass = Double(massString) {
                 person.mass = mass
             }
-            
-            
             person.edited = edited as NSDate
             
         }
@@ -287,10 +293,7 @@ struct SWAPI {
             film.director = director
             film.producer = producer
             film.opening_crawl = opening_crawl
-            
             film.episode_id = episode_id
-            
-            
             film.edited = edited as NSDate
             
             
