@@ -374,7 +374,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t0T-0m-rI6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="76" y="-772"/>
+            <point key="canvasLocation" x="76" y="-950"/>
         </scene>
         <!--Films-->
         <scene sceneID="FW4-ag-caa">
@@ -638,7 +638,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v6y-gW-nMo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3918" y="478"/>
+            <point key="canvasLocation" x="3918" y="417"/>
         </scene>
         <!--Planet Details-->
         <scene sceneID="1uE-nR-lLB">

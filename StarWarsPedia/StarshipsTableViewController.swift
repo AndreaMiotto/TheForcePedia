@@ -82,6 +82,20 @@ class StarshipsTableViewController: UITableViewController {
         let backItem = UIBarButtonItem()
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
+        
+        
+        switch segue.identifier {
+        case "showStarshipDetails"?:
+            if let selectedIndexPath = tableView.indexPathsForSelectedRows?.first {
+                let starship = starships[selectedIndexPath.row]
+                let destinationVC = segue.destination as! StarshipDetailsTableViewController
+                destinationVC.starship = starship
+                destinationVC.store = store
+            }
+            
+        default:
+            preconditionFailure("Unexpected segue identifier.")
+        }
 
      }
     
