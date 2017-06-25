@@ -81,6 +81,19 @@ class PlanetsTableViewController: UITableViewController {
         let backItem = UIBarButtonItem()
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
+        
+        switch segue.identifier {
+        case "showPlanetDetails"?:
+            if let selectedIndexPath = tableView.indexPathsForSelectedRows?.first {
+                let planet = planets[selectedIndexPath.row]
+                let destinationVC = segue.destination as! PlanetDetailsTableViewController
+                destinationVC.planet = planet
+                destinationVC.store = store
+            }
+            
+        default:
+            preconditionFailure("Unexpected segue identifier.")
+        }
      }
  
     
