@@ -81,6 +81,21 @@ class FilmsTableViewController: UITableViewController {
         let backItem = UIBarButtonItem()
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
+        
+        
+        switch segue.identifier {
+        case "showFilmDetails"?:
+            if let selectedIndexPath = tableView.indexPathsForSelectedRows?.first {
+                let film = films[selectedIndexPath.row]
+                let destinationVC = segue.destination as! FilmDetailsTableViewController
+                destinationVC.film = film
+                destinationVC.store = store
+            }
+            
+        default:
+            preconditionFailure("Unexpected segue identifier.")
+        }
+
 
      }
  
