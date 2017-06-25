@@ -22,13 +22,34 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg" translatesAutoresizingMaskIntoConstraints="NO" id="hiQ-ki-9Fu">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
+                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bju-Ei-yEA">
+                                <rect key="frame" x="0.0" y="100" width="375" height="56"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sta Wars Pedia" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RMo-Ri-26I">
+                                        <rect key="frame" x="105.5" y="14.5" width="164.5" height="27.5"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                        <size key="shadowOffset" width="0.0" height="1"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="7Kp-oc-x6g"/>
+                                    <constraint firstItem="RMo-Ri-26I" firstAttribute="centerY" secondItem="Bju-Ei-yEA" secondAttribute="centerY" id="qG2-Ic-6yp"/>
+                                    <constraint firstItem="RMo-Ri-26I" firstAttribute="centerX" secondItem="Bju-Ei-yEA" secondAttribute="centerX" id="xmD-n5-kia"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="Bju-Ei-yEA" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="80" id="C1o-gK-Y8k"/>
+                            <constraint firstItem="Bju-Ei-yEA" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="D03-dA-Zvt"/>
+                            <constraint firstItem="hiQ-ki-9Fu" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="EVW-n6-yHD"/>
                             <constraint firstAttribute="trailing" secondItem="hiQ-ki-9Fu" secondAttribute="trailing" id="NxG-6Y-9aT"/>
-                            <constraint firstItem="hiQ-ki-9Fu" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" id="bLI-Nj-l69"/>
+                            <constraint firstAttribute="trailing" secondItem="Bju-Ei-yEA" secondAttribute="trailing" id="bay-J8-dDb"/>
                             <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="hiQ-ki-9Fu" secondAttribute="bottom" id="eTW-Y2-df0"/>
                             <constraint firstItem="hiQ-ki-9Fu" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="xww-6z-gk1"/>
                         </constraints>
@@ -36,7 +57,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
     <resources>
