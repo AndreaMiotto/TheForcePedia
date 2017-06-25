@@ -80,6 +80,20 @@ class VehiclesTableViewController: UITableViewController {
         let backItem = UIBarButtonItem()
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
+        
+        switch segue.identifier {
+        case "showVehicleDetails"?:
+            if let selectedIndexPath = tableView.indexPathsForSelectedRows?.first {
+                let vehicle = vehicles[selectedIndexPath.row]
+                let destinationVC = segue.destination as! VehicleDetailsTableViewController
+                destinationVC.vehicle = vehicle
+                destinationVC.store = store
+            }
+            
+        default:
+            preconditionFailure("Unexpected segue identifier.")
+        }
+
 
      }
  
