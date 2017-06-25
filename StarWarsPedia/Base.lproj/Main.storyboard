@@ -340,7 +340,7 @@
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Search Images" id="WPP-bu-y1L">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="izr-ec-QMo">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="izr-ec-QMo">
                                             <color key="tintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
                                                 <action selector="searchDone:" destination="6ZG-Lx-gPH" id="pf6-At-j2A"/>
