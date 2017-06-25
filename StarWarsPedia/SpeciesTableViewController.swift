@@ -80,6 +80,19 @@ class SpeciesTableViewController: UITableViewController {
         let backItem = UIBarButtonItem()
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
+        
+        switch segue.identifier {
+        case "showSpecieDetails"?:
+            if let selectedIndexPath = tableView.indexPathsForSelectedRows?.first {
+                let specie = species[selectedIndexPath.row]
+                let destinationVC = segue.destination as! SpecieDetailsTableViewController
+                destinationVC.specie = specie
+                destinationVC.store = store
+            }
+            
+        default:
+            preconditionFailure("Unexpected segue identifier.")
+        }
 
      }
     
