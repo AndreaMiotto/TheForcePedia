@@ -70,7 +70,7 @@
         <attribute name="eye_colors" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="film_urls" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="hair_colors" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="homeworld_url" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="homeworld_url" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="language" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="skin_colors" optional="YES" attributeType="String" syncable="YES"/>

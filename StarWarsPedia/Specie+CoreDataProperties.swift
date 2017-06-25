@@ -27,7 +27,7 @@ extension Specie {
     @NSManaged public var name: String?
     @NSManaged public var skin_colors: String?
     @NSManaged public var url: String?
-    @NSManaged public var homeworld_url: [String]?
+    @NSManaged public var homeworld_url: String?
     @NSManaged public var character_urls: [String]?
     @NSManaged public var film_urls: [String]?
     @NSManaged public var films: NSSet?

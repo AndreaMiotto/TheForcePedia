@@ -45,6 +45,13 @@ struct SWAPI {
         return formatter
     }()
     
+    private static let dateFormatterForReleaseDate: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar(identifier: .iso8601)
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter
+    }()
+    
     static var allFilmsURL: URL {
         return SWAPIURL(method: .allFilms)
     }
@@ -308,9 +315,10 @@ struct SWAPI {
             film.vehicle_urls = vehicle_urls
             
             
-            if let release_date = dateFormatterISO8601.date(from: release_dateString) {
+            if let release_date = dateFormatterForReleaseDate.date(from: release_dateString) {
+                
                 film.release_date = release_date as NSDate
-            }
+            } 
             
         }
         return film
@@ -493,7 +501,7 @@ struct SWAPI {
             let editedString = json["edited"] as? String,
             let edited = dateFormatterISO8601.date(from: editedString),
             let character_urls = json["people"] as? [String],
-            let homeworld_url = json["homeworld"] as? [String],
+            let homeworld_url = json["homeworld"] as? String,
             let film_urls = json["films"] as? [String],
             let url = json["url"] as? String else {
                 
@@ -788,11 +796,8 @@ struct SWAPI {
             }
             if let passengers = Int32(passengersString) {
                 vehicle.passengers = passengers
-            }
-            
+            }            
             vehicle.edited = edited as NSDate
-            
- 
         }
         return vehicle
     }
