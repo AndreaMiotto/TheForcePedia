@@ -184,7 +184,7 @@ class VehicleDetailsTableViewController: UITableViewController {
                 cell.detailTextLabel?.text = "unknown"
             }
         case 8:
-            cell.textLabel?.text = "Cargos:"
+            cell.textLabel?.text = "Cargo:"
             if vehicle.cargo_capacity != 0 {
                 cell.detailTextLabel?.text = "\(vehicle.cargo_capacity) units"
             } else {

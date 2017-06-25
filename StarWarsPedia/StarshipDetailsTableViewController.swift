@@ -199,7 +199,7 @@ class StarshipDetailsTableViewController: UITableViewController {
                 cell.detailTextLabel?.text = "unknown"
             }
         case 10:
-            cell.textLabel?.text = "Cargos:"
+            cell.textLabel?.text = "Cargo:"
             if starship.cargo_capacity != 0 {
                 cell.detailTextLabel?.text = "\(starship.cargo_capacity) units"
             } else {
