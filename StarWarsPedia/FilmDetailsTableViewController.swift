@@ -196,7 +196,7 @@ class FilmDetailsTableViewController: UITableViewController {
     
     ///make all the connections for the selected resource
     func updateConnections() {
-        self.createPlanetsConnection(fromPerson: film, toPlanets: film.planet_urls)
+        self.createPlanetsConnection(fromFilm: film, toPlanets: film.planet_urls)
         self.createPersonsConnection(fromFilm: film, toPersons: film.character_urls)
         self.createSpeciesConnection(fromFilm: film, toSpecies: film.specie_urls)
         self.createStarshipsConnection(fromFilm: film, toStarships: film.starship_urls)
@@ -205,7 +205,7 @@ class FilmDetailsTableViewController: UITableViewController {
     }
     
     ///make the connections between the person and the homeworld planet
-    func createPlanetsConnection(fromPerson person: Film, toPlanets planets: [String]?) {
+    func createPlanetsConnection(fromFilm film: Film, toPlanets planets: [String]?) {
         //check if the planets array url is empty
         guard let urls = planets else {
             return
