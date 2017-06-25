@@ -254,14 +254,20 @@ struct SWAPI {
         
         guard
             let title = json["title"] as? String,
-            let url = json["url"] as? String,
+        
             let producer = json["producer"] as? String,
             let opening_crawl = json["opening_crawl"] as? String,
             let director = json["director"] as? String,
             let episode_id = json["episode_id"] as? Int16,
             let editedString = json["edited"] as? String,
             let edited = dateFormatterISO8601.date(from: editedString),
-            let release_dateString = json["release_date"] as? String else {
+            let release_dateString = json["release_date"] as? String,
+            let character_urls = json["characters"] as? [String],
+            let planet_urls = json["planets"] as? [String],
+            let specie_urls = json["species"] as? [String],
+            let starship_urls = json["starships"] as? [String],
+            let vehicle_urls = json["vehicles"] as? [String],
+            let url = json["url"] as? String else {
                 
                 //Don't have enough information to construct a film
                 print("Don't have enough information to construct a film")
@@ -295,6 +301,11 @@ struct SWAPI {
             film.opening_crawl = opening_crawl
             film.episode_id = episode_id
             film.edited = edited as NSDate
+            film.character_urls = character_urls
+            film.planet_urls = planet_urls
+            film.specie_urls = specie_urls
+            film.starship_urls = starship_urls
+            film.vehicle_urls = vehicle_urls
             
             
             if let release_date = dateFormatterISO8601.date(from: release_dateString) {
@@ -362,6 +373,8 @@ struct SWAPI {
             let surface_waterString = json["surface_water"] as? String,
             let editedString = json["edited"] as? String,
             let edited = dateFormatterISO8601.date(from: editedString),
+            let resident_urls = json["residents"] as? [String],
+            let film_urls = json["films"] as? [String],
             let url = json["url"] as? String else {
                 
                 //Don't have enough information to construct a Planet
@@ -393,6 +406,8 @@ struct SWAPI {
             planet.terrain = terrain
             planet.climate = climate
             planet.url = url
+            planet.resident_urls = resident_urls
+            planet.film_urls = film_urls
             
             if let diameter = Int32(diameterString) {
                 planet.diameter = diameter
@@ -477,6 +492,9 @@ struct SWAPI {
             let avarage_lifespanString = json["average_lifespan"] as? String,
             let editedString = json["edited"] as? String,
             let edited = dateFormatterISO8601.date(from: editedString),
+            let character_urls = json["people"] as? [String],
+            let homeworld_url = json["homeworld"] as? [String],
+            let film_urls = json["films"] as? [String],
             let url = json["url"] as? String else {
                 
                 //Don't have enough information to construct a Specie
@@ -512,6 +530,9 @@ struct SWAPI {
             specie.hair_colors = hair_colors
             specie.eye_colors = eye_colors
             specie.url = url
+            specie.character_urls = character_urls
+            specie.film_urls = film_urls
+            specie.homeworld_url = homeworld_url
             
             if let avarage_height = Double(avarage_heightString) {
                 specie.average_height = avarage_height
@@ -588,6 +609,8 @@ struct SWAPI {
             let passengersString = json["passengers"] as? String,
             let editedString = json["edited"] as? String,
             let edited = dateFormatterISO8601.date(from: editedString),
+            let pilot_urls = json["pilots"] as? [String],
+            let film_urls = json["films"] as? [String],
             let url = json["url"] as? String else {
                 
                 //Don't have enough information to construct a Starship
@@ -622,6 +645,8 @@ struct SWAPI {
             starship.mglt = mglt
             starship.model = model
             starship.starship_class = starship_class
+            starship.pilot_urls = pilot_urls
+            starship.film_urls = film_urls
             
             if let cargo_capacity = Int64(cargo_capacityString) {
                 starship.cargo_capacity = cargo_capacity
@@ -708,6 +733,8 @@ struct SWAPI {
             let passengersString = json["passengers"] as? String,
             let url = json["url"] as? String,
             let editedString = json["edited"] as? String,
+            let pilot_urls = json["pilots"] as? [String],
+            let film_urls = json["films"] as? [String],
             let edited = dateFormatterISO8601.date(from: editedString) else {
                 
                 //Don't have enough information to construct a Vehicle
@@ -741,6 +768,8 @@ struct SWAPI {
             vehicle.manufacturer = manufacturer
             vehicle.model = model
             vehicle.vehicle_class = vehicle_class
+            vehicle.pilot_urls = pilot_urls
+            vehicle.film_urls = film_urls
             
             if let cargo_capacity = Int64(cargo_capacityString) {
                 vehicle.cargo_capacity = cargo_capacity
