@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16G16b" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Film" representedClassName="Film" syncable="YES" codeGenerationType="class">
+    <entity name="Film" representedClassName="Film" syncable="YES">
         <attribute name="character_urls" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="director" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="edited" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -42,7 +42,7 @@
         <relationship name="starships" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Starship" inverseName="pilots" inverseEntity="Starship" syncable="YES"/>
         <relationship name="vehicles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Vehicle" inverseName="pilots" inverseEntity="Vehicle" syncable="YES"/>
     </entity>
-    <entity name="Planet" representedClassName="Planet" syncable="YES" codeGenerationType="class">
+    <entity name="Planet" representedClassName="Planet" syncable="YES">
         <attribute name="climate" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="diameter" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="edited" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -60,7 +60,7 @@
         <relationship name="residents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Person" inverseName="homeworld" inverseEntity="Person" syncable="YES"/>
         <relationship name="species" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Specie" inverseName="homeworld" inverseEntity="Specie" syncable="YES"/>
     </entity>
-    <entity name="Specie" representedClassName="Specie" syncable="YES" codeGenerationType="class">
+    <entity name="Specie" representedClassName="Specie" syncable="YES">
         <attribute name="average_height" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="average_lifespan" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="character_urls" optional="YES" attributeType="Transformable" syncable="YES"/>
@@ -79,7 +79,7 @@
         <relationship name="homeworld" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Planet" inverseName="species" inverseEntity="Planet" syncable="YES"/>
         <relationship name="people" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Person" inverseName="species" inverseEntity="Person" syncable="YES"/>
     </entity>
-    <entity name="Starship" representedClassName="Starship" syncable="YES" codeGenerationType="class">
+    <entity name="Starship" representedClassName="Starship" syncable="YES">
         <attribute name="cargo_capacity" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="consumables" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="cost_in_credits" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -100,7 +100,7 @@
         <relationship name="films" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Film" inverseName="starships" inverseEntity="Film" syncable="YES"/>
         <relationship name="pilots" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Person" inverseName="starships" inverseEntity="Person" syncable="YES"/>
     </entity>
-    <entity name="Vehicle" representedClassName="Vehicle" syncable="YES" codeGenerationType="class">
+    <entity name="Vehicle" representedClassName="Vehicle" syncable="YES">
         <attribute name="cargo_capacity" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="consumables" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="cost_in_credits" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
