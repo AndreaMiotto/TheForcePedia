@@ -204,7 +204,7 @@ class FilmDetailsTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
-    ///make the connections between the person and the homeworld planet
+    ///make the connections between the film and the planets
     func createPlanetsConnection(fromFilm film: Film, toPlanets planets: [String]?) {
         //check if the planets array url is empty
         guard let urls = planets else {
@@ -241,7 +241,7 @@ class FilmDetailsTableViewController: UITableViewController {
         
     }
     
-    ///make the connections between the person and the persons
+    ///make the connections between the film and the characters
     func createPersonsConnection(fromFilm film: Film, toPersons persons: [String]?) {
         //check if the persons array url is empty
         guard let urls = persons else {
