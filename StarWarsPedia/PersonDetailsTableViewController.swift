@@ -152,14 +152,14 @@ class PersonDetailsTableViewController: UITableViewController {
         case 3:
             cell.textLabel?.text = "Height:"
             if person.height != 0 {
-                cell.detailTextLabel?.text = "\(person.height)"
+                cell.detailTextLabel?.text = "\(person.height) cm."
             } else {
                 cell.detailTextLabel?.text = "unknown"
             }
         case 4:
             cell.textLabel?.text = "Mass:"
             if person.mass != 0 {
-                cell.detailTextLabel?.text = "\(person.mass)"
+                cell.detailTextLabel?.text = "\(person.mass) kg."
             } else {
                 cell.detailTextLabel?.text = "unknown"
             }
