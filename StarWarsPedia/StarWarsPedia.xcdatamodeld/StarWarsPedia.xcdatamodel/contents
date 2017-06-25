@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16G16b" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Film" representedClassName="Film" syncable="YES" codeGenerationType="class">
+        <attribute name="character_urls" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="director" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="edited" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="episode_id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="opening_crawl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="planet_urls" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="producer" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="release_date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="specie_urls" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="starship_urls" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="vehicle_urls" optional="YES" attributeType="Transformable" syncable="YES"/>
         <relationship name="characters" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Person" inverseName="films" inverseEntity="Person" syncable="YES"/>
         <relationship name="planets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Planet" inverseName="films" inverseEntity="Planet" syncable="YES"/>
         <relationship name="species" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Specie" inverseName="films" inverseEntity="Specie" syncable="YES"/>
@@ -41,10 +46,12 @@
         <attribute name="climate" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="diameter" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="edited" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="film_urls" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="gravity" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="orbital_period" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="population" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="resident_urls" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="rotation_period" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="surface_water" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="terrain" optional="YES" attributeType="String" syncable="YES"/>
@@ -56,11 +63,14 @@
     <entity name="Specie" representedClassName="Specie" syncable="YES" codeGenerationType="class">
         <attribute name="average_height" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="average_lifespan" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="character_urls" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="classification" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="designation" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="edited" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="eye_colors" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="film_urls" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="hair_colors" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="homeworld_url" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="language" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="skin_colors" optional="YES" attributeType="String" syncable="YES"/>
@@ -75,6 +85,7 @@
         <attribute name="cost_in_credits" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="crew" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="edited" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="film_urls" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="hyperdrive_rating" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="length" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="manufacturer" optional="YES" attributeType="String" syncable="YES"/>
@@ -83,6 +94,7 @@
         <attribute name="model" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="passengers" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="pilot_urls" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="starship_class" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="films" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Film" inverseName="starships" inverseEntity="Film" syncable="YES"/>
@@ -94,23 +106,25 @@
         <attribute name="cost_in_credits" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="crew" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="edited" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="film_urls" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="length" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="manufacturer" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="max_atmosphering_speed" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="model" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="passengers" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="pilot_urls" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="vehicle_class" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="films" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Film" inverseName="vehicles" inverseEntity="Film" syncable="YES"/>
         <relationship name="pilots" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Person" inverseName="vehicles" inverseEntity="Person" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Film" positionX="-36" positionY="-222" width="128" height="240"/>
+        <element name="Film" positionX="-36" positionY="-222" width="128" height="315"/>
         <element name="Person" positionX="-720" positionY="81" width="128" height="345"/>
-        <element name="Planet" positionX="-378" positionY="-312" width="128" height="255"/>
-        <element name="Specie" positionX="-684" positionY="-255" width="128" height="255"/>
-        <element name="Starship" positionX="-18" positionY="81" width="128" height="300"/>
-        <element name="Vehicle" positionX="-243" positionY="45" width="128" height="270"/>
+        <element name="Planet" positionX="-378" positionY="-312" width="128" height="285"/>
+        <element name="Specie" positionX="-684" positionY="-255" width="128" height="300"/>
+        <element name="Starship" positionX="-18" positionY="81" width="128" height="330"/>
+        <element name="Vehicle" positionX="-243" positionY="45" width="128" height="300"/>
     </elements>
 </model>
