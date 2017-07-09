@@ -11,6 +11,10 @@ import UIKit
 class PersonsTableViewController: UITableViewController {
     
     //--------------------
+    //MARK: - Outlets
+    //--------------------
+    
+    //--------------------
     //MARK: - Properties
     //--------------------
     
@@ -18,6 +22,9 @@ class PersonsTableViewController: UITableViewController {
     var store: DataStore!
     
     var persons = [Person]()
+    var filteredPersons = [Person]()
+    
+    let searchController = UISearchController(searchResultsController: nil)
 
     //--------------------
     //MARK: - View Methods
@@ -30,11 +37,15 @@ class PersonsTableViewController: UITableViewController {
         
         self.updateDataSource()
         
-        /*
-        store.fetchAllPersonsFromAPI() { (personResult) in
-         self.updateDataSource()
-        }
-         */
+        
+        //Search Bar
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        searchController.searchBar.searchBarStyle = .minimal
+        searchController.searchBar.tintColor = UIColor.orange
+        tableView.tableHeaderView = searchController.searchBar
+        
  
  
     }
@@ -56,6 +67,9 @@ class PersonsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if searchController.isActive && searchController.searchBar.text != "" {
+            return filteredPersons.count
+        }
         return persons.count
     }
 
@@ -64,7 +78,15 @@ class PersonsTableViewController: UITableViewController {
 
         let reuseIdentifier = "personCell"
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) ?? UITableViewCell(style: .default, reuseIdentifier: reuseIdentifier)
-        cell.textLabel?.text = persons[indexPath.row].name
+        
+        let person: Person
+        if searchController.isActive && searchController.searchBar.text != "" {
+            person = filteredPersons[indexPath.row]
+        } else {
+            person = persons[indexPath.row]
+        }
+        
+        cell.textLabel?.text = person.name
         return cell
      
     }
@@ -85,7 +107,12 @@ class PersonsTableViewController: UITableViewController {
         switch segue.identifier {
         case "showPersonDetails"?:
             if let selectedIndexPath = tableView.indexPathsForSelectedRows?.first {
-                let person = persons[selectedIndexPath.row]
+                let person: Person
+                if searchController.isActive && searchController.searchBar.text != "" {
+                    person = filteredPersons[selectedIndexPath.row]
+                } else {
+                    person = persons[selectedIndexPath.row]
+                }
                 let destinationVC = segue.destination as! PersonDetailsTableViewController
                 destinationVC.person = person
                 destinationVC.store = store
@@ -112,5 +139,25 @@ class PersonsTableViewController: UITableViewController {
             self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
         }
     }
+    
+    func filterContentForSearchText(searchText: String, scope: String = "All") {
+        filteredPersons = persons.filter { person in
+            if let name = person.name {
+                let result = name.lowercased().contains(searchText.lowercased())
+                return result
+            } else {
+               return false
+            }
+        }
+        tableView.reloadData()
+    }
 
+}
+
+extension PersonsTableViewController: UISearchResultsUpdating {
+        
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchText: searchController.searchBar.text!)
+    }
+    
 }

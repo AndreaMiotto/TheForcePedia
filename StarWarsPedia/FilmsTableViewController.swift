@@ -31,12 +31,6 @@ class FilmsTableViewController: UITableViewController {
         
         self.updateDataSource()
         
-        /*
-        store.fetchAllFilmsFromAPI() { (filmResult) in
-            self.updateDataSource()
-        }
-         */
-        
         
     }
     

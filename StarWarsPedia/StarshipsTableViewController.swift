@@ -32,13 +32,6 @@ class StarshipsTableViewController: UITableViewController {
         self.updateDataSource()
         
         
-        /*
-         store.fetchAllStarshipsFromAPI() { (starshipResult) in
-         self.updateDataSource()
-         }
-         */
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {

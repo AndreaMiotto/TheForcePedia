@@ -30,12 +30,6 @@ class SpeciesTableViewController: UITableViewController {
         
         self.updateDataSource()
         
-        /*
-         store.fetchAllSpeciesFromAPI() { (specieResult) in
-         self.updateDataSource()
-         }
-         */
-        
         
     }
     

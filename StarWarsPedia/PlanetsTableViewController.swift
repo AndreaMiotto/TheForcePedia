@@ -31,12 +31,6 @@ class PlanetsTableViewController: UITableViewController {
         
         self.updateDataSource()
         
-        /*
-         store.fetchAllPlanetsFromAPI() { (planetResult) in
-         self.updateDataSource()
-         }
-         */
-        
         
     }
     

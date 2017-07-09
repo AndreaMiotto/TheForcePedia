@@ -68,7 +68,7 @@ class LandingViewController: UITableViewController {
 
         
         switch segue.identifier {
-        case "showPersons"?:
+        case "showCharacters"?:
             let destinationVC = segue.destination as! PersonsTableViewController
             destinationVC.store = store
             

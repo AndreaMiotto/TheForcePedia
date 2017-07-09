@@ -30,12 +30,6 @@ class VehiclesTableViewController: UITableViewController {
         
         self.updateDataSource()
         
-        /*
-         store.fetchAllVehiclesFromAPI() { (vehicleResult) in
-         self.updateDataSource()
-         }
-         */
-        
         
     }
     
