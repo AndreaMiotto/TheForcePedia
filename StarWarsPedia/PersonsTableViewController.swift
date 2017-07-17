@@ -22,8 +22,8 @@ class PersonsTableViewController: UITableViewController {
     var store: DataStore!
     
     var persons = [Person]()
-    var filteredPersons = [Person]()
     
+    var filteredPersons = [Person]()
     let searchController = UISearchController(searchResultsController: nil)
 
     //--------------------

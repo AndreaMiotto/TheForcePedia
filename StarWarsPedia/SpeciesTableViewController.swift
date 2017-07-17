@@ -19,6 +19,9 @@ class SpeciesTableViewController: UITableViewController {
     
     var species = [Specie]()
     
+    var filteredSpecies = [Specie]()
+    let searchController = UISearchController(searchResultsController: nil)
+    
     //--------------------
     //MARK: - View Methods
     //--------------------
@@ -29,6 +32,16 @@ class SpeciesTableViewController: UITableViewController {
         tableView.delegate = self
         
         self.updateDataSource()
+        
+        
+        //Search Bar
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        searchController.searchBar.searchBarStyle = .minimal
+        searchController.searchBar.tintColor = UIColor.orange
+        tableView.tableHeaderView = searchController.searchBar
+
         
         
     }
@@ -50,6 +63,9 @@ class SpeciesTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if searchController.isActive && searchController.searchBar.text != "" {
+            return filteredSpecies.count
+        }
         return species.count
     }
     
@@ -58,8 +74,17 @@ class SpeciesTableViewController: UITableViewController {
         
         let reuseIdentifier = "specieCell"
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) ?? UITableViewCell(style: .default, reuseIdentifier: reuseIdentifier)
-        cell.textLabel?.text = species[indexPath.row].name
+        let specie: Specie
+        if searchController.isActive && searchController.searchBar.text != "" {
+            specie = filteredSpecies[indexPath.row]
+        } else {
+            specie = species[indexPath.row]
+        }
+        
+        cell.textLabel?.text = specie.name
         return cell
+        
+
         
     }
     
@@ -78,11 +103,17 @@ class SpeciesTableViewController: UITableViewController {
         switch segue.identifier {
         case "showSpecieDetails"?:
             if let selectedIndexPath = tableView.indexPathsForSelectedRows?.first {
-                let specie = species[selectedIndexPath.row]
+                let specie: Specie
+                if searchController.isActive && searchController.searchBar.text != "" {
+                    specie = filteredSpecies[selectedIndexPath.row]
+                } else {
+                    specie = species[selectedIndexPath.row]
+                }
                 let destinationVC = segue.destination as! SpecieDetailsTableViewController
                 destinationVC.specie = specie
                 destinationVC.store = store
             }
+
             
         default:
             preconditionFailure("Unexpected segue identifier.")
@@ -105,6 +136,26 @@ class SpeciesTableViewController: UITableViewController {
             }
             self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
         }
+    }
+    
+    func filterContentForSearchText(searchText: String, scope: String = "All") {
+        filteredSpecies = species.filter { specie in
+            if let name = specie.name {
+                let result = name.lowercased().contains(searchText.lowercased())
+                return result
+            } else {
+                return false
+            }
+        }
+        tableView.reloadData()
+    }
+    
+}
+
+extension SpeciesTableViewController: UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchText: searchController.searchBar.text!)
     }
     
 }

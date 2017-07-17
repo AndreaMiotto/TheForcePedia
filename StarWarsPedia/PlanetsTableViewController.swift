@@ -20,6 +20,9 @@ class PlanetsTableViewController: UITableViewController {
     
     var planets = [Planet]()
     
+    var filteredPlanets = [Planet]()
+    let searchController = UISearchController(searchResultsController: nil)
+    
     //--------------------
     //MARK: - View Methods
     //--------------------
@@ -30,6 +33,14 @@ class PlanetsTableViewController: UITableViewController {
         tableView.delegate = self
         
         self.updateDataSource()
+        
+        //Search Bar
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        searchController.searchBar.searchBarStyle = .minimal
+        searchController.searchBar.tintColor = UIColor.orange
+        tableView.tableHeaderView = searchController.searchBar
         
         
     }
@@ -51,7 +62,11 @@ class PlanetsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if searchController.isActive && searchController.searchBar.text != "" {
+            return filteredPlanets.count
+        }
         return planets.count
+
     }
     
     
@@ -59,8 +74,16 @@ class PlanetsTableViewController: UITableViewController {
         
         let reuseIdentifier = "planetCell"
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) ?? UITableViewCell(style: .default, reuseIdentifier: reuseIdentifier)
-        cell.textLabel?.text = planets[indexPath.row].name
+        let planet: Planet
+        if searchController.isActive && searchController.searchBar.text != "" {
+            planet = filteredPlanets[indexPath.row]
+        } else {
+            planet = planets[indexPath.row]
+        }
+        
+        cell.textLabel?.text = planet.name
         return cell
+
         
     }
     
@@ -79,11 +102,17 @@ class PlanetsTableViewController: UITableViewController {
         switch segue.identifier {
         case "showPlanetDetails"?:
             if let selectedIndexPath = tableView.indexPathsForSelectedRows?.first {
-                let planet = planets[selectedIndexPath.row]
+                let planet: Planet
+                if searchController.isActive && searchController.searchBar.text != "" {
+                    planet = filteredPlanets[selectedIndexPath.row]
+                } else {
+                    planet = planets[selectedIndexPath.row]
+                }
                 let destinationVC = segue.destination as! PlanetDetailsTableViewController
                 destinationVC.planet = planet
                 destinationVC.store = store
             }
+
             
         default:
             preconditionFailure("Unexpected segue identifier.")
@@ -105,6 +134,27 @@ class PlanetsTableViewController: UITableViewController {
             }
             self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
         }
+    }
+    
+    func filterContentForSearchText(searchText: String, scope: String = "All") {
+        filteredPlanets = planets.filter { planet in
+            if let name = planet.name {
+                let result = name.lowercased().contains(searchText.lowercased())
+                return result
+            } else {
+                return false
+            }
+        }
+        tableView.reloadData()
+    }
+
+    
+}
+
+extension PlanetsTableViewController: UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchText: searchController.searchBar.text!)
     }
     
 }

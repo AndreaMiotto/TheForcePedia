@@ -19,6 +19,9 @@ class VehiclesTableViewController: UITableViewController {
     
     var vehicles = [Vehicle]()
     
+    var filteredVehicles = [Vehicle]()
+    let searchController = UISearchController(searchResultsController: nil)
+    
     //--------------------
     //MARK: - View Methods
     //--------------------
@@ -29,6 +32,14 @@ class VehiclesTableViewController: UITableViewController {
         tableView.delegate = self
         
         self.updateDataSource()
+        
+        //Search Bar
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        searchController.searchBar.searchBarStyle = .minimal
+        searchController.searchBar.tintColor = UIColor.orange
+        tableView.tableHeaderView = searchController.searchBar
         
         
     }
@@ -50,6 +61,9 @@ class VehiclesTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if searchController.isActive && searchController.searchBar.text != "" {
+            return filteredVehicles.count
+        }
         return vehicles.count
     }
     
@@ -58,7 +72,14 @@ class VehiclesTableViewController: UITableViewController {
         
         let reuseIdentifier = "vehicleCell"
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) ?? UITableViewCell(style: .default, reuseIdentifier: reuseIdentifier)
-        cell.textLabel?.text = vehicles[indexPath.row].name
+        let vehicle: Vehicle
+        if searchController.isActive && searchController.searchBar.text != "" {
+            vehicle = filteredVehicles[indexPath.row]
+        } else {
+            vehicle = vehicles[indexPath.row]
+        }
+        
+        cell.textLabel?.text = vehicle.name
         return cell
         
     }
@@ -78,11 +99,17 @@ class VehiclesTableViewController: UITableViewController {
         switch segue.identifier {
         case "showVehicleDetails"?:
             if let selectedIndexPath = tableView.indexPathsForSelectedRows?.first {
-                let vehicle = vehicles[selectedIndexPath.row]
+                let vehicle: Vehicle
+                if searchController.isActive && searchController.searchBar.text != "" {
+                    vehicle = filteredVehicles[selectedIndexPath.row]
+                } else {
+                    vehicle = vehicles[selectedIndexPath.row]
+                }
                 let destinationVC = segue.destination as! VehicleDetailsTableViewController
                 destinationVC.vehicle = vehicle
                 destinationVC.store = store
             }
+
             
         default:
             preconditionFailure("Unexpected segue identifier.")
@@ -108,6 +135,27 @@ class VehiclesTableViewController: UITableViewController {
         }
     }
     
+    func filterContentForSearchText(searchText: String, scope: String = "All") {
+        filteredVehicles = vehicles.filter { vehicle in
+            if let name = vehicle.name {
+                let result = name.lowercased().contains(searchText.lowercased())
+                return result
+            } else {
+                return false
+            }
+        }
+        tableView.reloadData()
+    }
+    
 }
+
+extension VehiclesTableViewController: UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchText: searchController.searchBar.text!)
+    }
+    
+}
+
 
 

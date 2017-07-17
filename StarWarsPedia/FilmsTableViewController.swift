@@ -20,6 +20,9 @@ class FilmsTableViewController: UITableViewController {
     
     var films = [Film]()
     
+    var filteredFilms = [Film]()
+    let searchController = UISearchController(searchResultsController: nil)
+    
     //--------------------
     //MARK: - View Methods
     //--------------------
@@ -30,6 +33,14 @@ class FilmsTableViewController: UITableViewController {
         tableView.delegate = self
         
         self.updateDataSource()
+        
+        //Search Bar
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        searchController.searchBar.searchBarStyle = .minimal
+        searchController.searchBar.tintColor = UIColor.orange
+        tableView.tableHeaderView = searchController.searchBar
         
         
     }
@@ -51,6 +62,9 @@ class FilmsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if searchController.isActive && searchController.searchBar.text != "" {
+            return filteredFilms.count
+        }
         return films.count
     }
     
@@ -59,7 +73,15 @@ class FilmsTableViewController: UITableViewController {
         
         let reuseIdentifier = "filmCell"
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) ?? UITableViewCell(style: .default, reuseIdentifier: reuseIdentifier)
-        cell.textLabel?.text = films[indexPath.row].title
+        
+        let film: Film
+        if searchController.isActive && searchController.searchBar.text != "" {
+            film = filteredFilms[indexPath.row]
+        } else {
+            film = films[indexPath.row]
+        }
+        
+        cell.textLabel?.text = film.title
         return cell
         
     }
@@ -80,7 +102,12 @@ class FilmsTableViewController: UITableViewController {
         switch segue.identifier {
         case "showFilmDetails"?:
             if let selectedIndexPath = tableView.indexPathsForSelectedRows?.first {
-                let film = films[selectedIndexPath.row]
+                let film: Film
+                if searchController.isActive && searchController.searchBar.text != "" {
+                    film = filteredFilms[selectedIndexPath.row]
+                } else {
+                    film = films[selectedIndexPath.row]
+                }
                 let destinationVC = segue.destination as! FilmDetailsTableViewController
                 destinationVC.film = film
                 destinationVC.store = store
@@ -108,6 +135,27 @@ class FilmsTableViewController: UITableViewController {
             }
             self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
         }
+    }
+    
+    func filterContentForSearchText(searchText: String, scope: String = "All") {
+        filteredFilms = films.filter { film in
+            if let title = film.title {
+                let result = title.lowercased().contains(searchText.lowercased())
+                return result
+            } else {
+                return false
+            }
+        }
+        tableView.reloadData()
+    }
+
+    
+}
+
+extension FilmsTableViewController: UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchText: searchController.searchBar.text!)
     }
     
 }

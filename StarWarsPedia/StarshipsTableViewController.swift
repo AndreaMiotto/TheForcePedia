@@ -20,6 +20,9 @@ class StarshipsTableViewController: UITableViewController {
     
     var starships = [Starship]()
     
+    var filteredStarships = [Starship]()
+    let searchController = UISearchController(searchResultsController: nil)
+    
     //--------------------
     //MARK: - View Methods
     //--------------------
@@ -30,6 +33,17 @@ class StarshipsTableViewController: UITableViewController {
         tableView.delegate = self
         
         self.updateDataSource()
+        
+        
+
+        
+        //Search Bar
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        searchController.searchBar.searchBarStyle = .minimal
+        searchController.searchBar.tintColor = UIColor.orange
+        tableView.tableHeaderView = searchController.searchBar
         
         
     }
@@ -51,6 +65,9 @@ class StarshipsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if searchController.isActive && searchController.searchBar.text != "" {
+            return filteredStarships.count
+        }
         return starships.count
     }
     
@@ -59,7 +76,14 @@ class StarshipsTableViewController: UITableViewController {
         
         let reuseIdentifier = "starshipCell"
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) ?? UITableViewCell(style: .default, reuseIdentifier: reuseIdentifier)
-        cell.textLabel?.text = starships[indexPath.row].name
+        let starship: Starship
+        if searchController.isActive && searchController.searchBar.text != "" {
+            starship = filteredStarships[indexPath.row]
+        } else {
+            starship = starships[indexPath.row]
+        }
+        
+        cell.textLabel?.text = starship.name
         return cell
         
     }
@@ -80,11 +104,17 @@ class StarshipsTableViewController: UITableViewController {
         switch segue.identifier {
         case "showStarshipDetails"?:
             if let selectedIndexPath = tableView.indexPathsForSelectedRows?.first {
-                let starship = starships[selectedIndexPath.row]
+                let starship: Starship
+                if searchController.isActive && searchController.searchBar.text != "" {
+                    starship = filteredStarships[selectedIndexPath.row]
+                } else {
+                    starship = starships[selectedIndexPath.row]
+                }
                 let destinationVC = segue.destination as! StarshipDetailsTableViewController
                 destinationVC.starship = starship
                 destinationVC.store = store
             }
+
             
         default:
             preconditionFailure("Unexpected segue identifier.")
@@ -109,6 +139,25 @@ class StarshipsTableViewController: UITableViewController {
         }
     }
     
+    func filterContentForSearchText(searchText: String, scope: String = "All") {
+        filteredStarships = starships.filter { starship in
+            if let name = starship.name {
+                let result = name.lowercased().contains(searchText.lowercased())
+                return result
+            } else {
+                return false
+            }
+        }
+        tableView.reloadData()
+    }
+    
 }
 
+extension StarshipsTableViewController: UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchText: searchController.searchBar.text!)
+    }
+    
+}
 
