@@ -36,9 +36,13 @@ class VehiclesTableViewController: UITableViewController {
         //Search Bar
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
+        //searchController.hidesNavigationBarDuringPresentation = false
         definesPresentationContext = true
         searchController.searchBar.searchBarStyle = .minimal
+        searchController.searchBar.backgroundColor = UIColor.black
         searchController.searchBar.tintColor = UIColor.orange
+        let textFieldInsideSearchBar = searchController.searchBar.value(forKey: "searchField") as? UITextField
+        textFieldInsideSearchBar?.textColor = UIColor.white
         tableView.tableHeaderView = searchController.searchBar
         
         

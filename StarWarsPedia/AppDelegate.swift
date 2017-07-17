@@ -22,6 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let landingViewController = rootViewController.topViewController as! LandingViewController
         landingViewController.store = DataStore()
         
+        UIApplication.shared.isStatusBarHidden = true
+        
         return true
     }
 
