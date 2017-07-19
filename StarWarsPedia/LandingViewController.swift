@@ -20,12 +20,22 @@ class LandingViewController: UITableViewController {
     //ApplicationDelegate.swift
     var store: DataStore!
     
+    ///This is the audio player to play mp3 files
     var audioPlayer:AVAudioPlayer!
     
+
     override func viewDidLoad() {
         
+        super.viewDidLoad()
+        
+        //Disable row selection and display activity indicator
+        tableView.allowsSelection = false
+        ProgressView.shared.showProgressView(view)
+        
+        ///This is the group that contains all the async tasks
         let group = DispatchGroup()
     
+        //Download the data from API
         store.fetchAllPersonsFromAPI(dispatchGroup: group) { (personResult) in
             print("characters downloaded")
             group.leave()
@@ -56,10 +66,19 @@ class LandingViewController: UITableViewController {
             group.leave()
         }
         
+        //If all the async tasks are completed
         group.notify(queue: DispatchQueue.global(qos: .background)) {
             print("All async calls were run!")
+            DispatchQueue.main.async(){
+                //Hide the activity Indicator
+                ProgressView.shared.hideProgressView()
+                //Allow row selections
+                self.tableView.allowsSelection = true
+            }
+            
         }
         
+        //Play the intro sound
         playSound(path: "/Sounds/Hum", ofType: "mp3")
     }
     

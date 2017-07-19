@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		01253CE11F1FC37D00F0D003 /* Sounds in Resources */ = {isa = PBXBuildFile; fileRef = 01253CE01F1FC37D00F0D003 /* Sounds */; };
+		01253CE31F2005F100F0D003 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01253CE21F2005F100F0D003 /* ProgressView.swift */; };
 		01486BFC1EFFA705009D0ADB /* Starship+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01486BF21EFFA705009D0ADB /* Starship+CoreDataClass.swift */; };
 		01486BFD1EFFA705009D0ADB /* Starship+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01486BF31EFFA705009D0ADB /* Starship+CoreDataProperties.swift */; };
 		01486BFE1EFFA705009D0ADB /* Film+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01486BF41EFFA705009D0ADB /* Film+CoreDataClass.swift */; };
@@ -64,6 +65,7 @@
 
 /* Begin PBXFileReference section */
 		01253CE01F1FC37D00F0D003 /* Sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Sounds; sourceTree = "<group>"; };
+		01253CE21F2005F100F0D003 /* ProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		01486BF21EFFA705009D0ADB /* Starship+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Starship+CoreDataClass.swift"; sourceTree = "<group>"; };
 		01486BF31EFFA705009D0ADB /* Starship+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Starship+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		01486BF41EFFA705009D0ADB /* Film+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Film+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 			isa = PBXGroup;
 			children = (
 				0177971B1EF6C05E00AEC310 /* LandingViewController.swift */,
+				01253CE21F2005F100F0D003 /* ProgressView.swift */,
 				017797231EF6DDFD00AEC310 /* PersonsTableViewController.swift */,
 				017797251EFAA83C00AEC310 /* FilmsTableViewController.swift */,
 				0182B0681EFD2AA6004C02F8 /* PlanetsTableViewController.swift */,
@@ -389,6 +392,7 @@
 				01E839E71EE30CF00044DFAA /* StarWarsPedia.xcdatamodeld in Sources */,
 				0182B06D1EFD875A004C02F8 /* StarshipsTableViewController.swift in Sources */,
 				01486C021EFFA705009D0ADB /* Planet+CoreDataClass.swift in Sources */,
+				01253CE31F2005F100F0D003 /* ProgressView.swift in Sources */,
 				01486C151EFFBC84009D0ADB /* VehicleDetailsTableViewController.swift in Sources */,
 				01486C0F1EFFBC67009D0ADB /* PlanetDetailsTableViewController.swift in Sources */,
 				0172C4ED1EE7255500023650 /* DataStore.swift in Sources */,
