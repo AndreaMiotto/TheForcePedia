@@ -29,7 +29,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="179.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="species_ico" translatesAutoresizingMaskIntoConstraints="NO" id="jbq-Pl-y5O">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageView:jbq-Pl-y5O:image" translatesAutoresizingMaskIntoConstraints="NO" id="jbq-Pl-y5O">
                                                     <rect key="frame" x="137" y="16" width="100" height="100"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="100" id="XW3-hj-Lsu"/>
@@ -62,7 +62,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="179.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="species_ico" translatesAutoresizingMaskIntoConstraints="NO" id="Sm2-Dd-hGJ">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageView:jbq-Pl-y5O:image" translatesAutoresizingMaskIntoConstraints="NO" id="Sm2-Dd-hGJ">
                                                     <rect key="frame" x="137" y="16" width="100" height="100"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="100" id="DWh-LS-6QL"/>
@@ -95,7 +95,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="179.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="species_ico" translatesAutoresizingMaskIntoConstraints="NO" id="atL-nT-Hp9">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageView:jbq-Pl-y5O:image" translatesAutoresizingMaskIntoConstraints="NO" id="atL-nT-Hp9">
                                                     <rect key="frame" x="137" y="16" width="100" height="100"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="100" id="aPA-t3-tZ9"/>
@@ -128,7 +128,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="179.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="species_ico" translatesAutoresizingMaskIntoConstraints="NO" id="WVF-zt-aBw">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageView:jbq-Pl-y5O:image" translatesAutoresizingMaskIntoConstraints="NO" id="WVF-zt-aBw">
                                                     <rect key="frame" x="137" y="16" width="100" height="100"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="100" id="Dx2-S3-swG"/>
@@ -1015,8 +1015,22 @@
         </scene>
     </scenes>
     <resources>
+        <image name="imageView:jbq-Pl-y5O:image" width="99" height="100">
+            <mutableData key="keyedArchiveRepresentation">
+YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBMU
+GR4fJSYsLzU4VSRudWxs1QkKCwwNDg8QERJWTlNTaXplViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBz
+V05TQ29sb3KAAoAMEiTAAACAA4AKWXs5OSwgMTAwfdIVChYYWk5TLm9iamVjdHOhF4AEgAnSFQoaGKIb
+HIAFgAaACRAF0yAKISIjJFdOUy5iYXNlW05TLnJlbGF0aXZlgACACIAHXxBzZmlsZTovLy9BcHBsaWNh
+dGlvbnMvWGNvZGUuYXBwL0NvbnRlbnRzL1BsdWdJbnMvSURFSW50ZXJmYWNlQnVpbGRlcktpdC5mcmFt
+ZXdvcmsvUmVzb3VyY2VzL0lCTWlzc2luZ0ltYWdlR2x5cGgudGlmZtInKCkqWiRjbGFzc25hbWVYJGNs
+YXNzZXNVTlNVUkyiKStYTlNPYmplY3TSJygtLldOU0FycmF5oi0r0zAxCjIzNFdOU1doaXRlXE5TQ29s
+b3JTcGFjZUQwIDAAEAOAC9InKDY3V05TQ29sb3KiNivSJyg5OldOU0ltYWdlojkrXxAPTlNLZXllZEFy
+Y2hpdmVy0T0+VHJvb3SAAQAIABEAGgAjAC0AMgA3AEUASwBWAF0AZABxAHgAgACCAIQAiQCLAI0AlwCc
+AKcAqQCrAK0AsgC1ALcAuQC7AL0AxADMANgA2gDcAN4BVAFZAWQBbQFzAXYBfwGEAYwBjwGWAZ4BqwGw
+AbIBtAG5AcEBxAHJAdEB1AHmAekB7gAAAAAAAAIBAAAAAAAAAD8AAAAAAAAAAAAAAAAAAAHwA
+</mutableData>
+        </image>
         <image name="images_ico" width="25" height="23"/>
-        <image name="species_ico" width="99" height="100"/>
         <image name="starship_ico" width="100" height="99"/>
         <image name="vehicle_ico" width="100" height="99"/>
     </resources>

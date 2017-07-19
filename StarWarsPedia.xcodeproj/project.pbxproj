@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01253CE11F1FC37D00F0D003 /* Sounds in Resources */ = {isa = PBXBuildFile; fileRef = 01253CE01F1FC37D00F0D003 /* Sounds */; };
 		01486BFC1EFFA705009D0ADB /* Starship+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01486BF21EFFA705009D0ADB /* Starship+CoreDataClass.swift */; };
 		01486BFD1EFFA705009D0ADB /* Starship+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01486BF31EFFA705009D0ADB /* Starship+CoreDataProperties.swift */; };
 		01486BFE1EFFA705009D0ADB /* Film+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01486BF41EFFA705009D0ADB /* Film+CoreDataClass.swift */; };
@@ -62,6 +63,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		01253CE01F1FC37D00F0D003 /* Sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Sounds; sourceTree = "<group>"; };
 		01486BF21EFFA705009D0ADB /* Starship+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Starship+CoreDataClass.swift"; sourceTree = "<group>"; };
 		01486BF31EFFA705009D0ADB /* Starship+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Starship+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		01486BF41EFFA705009D0ADB /* Film+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Film+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 				01E839E31EE30CD10044DFAA /* View */,
 				01E839E21EE30CCA0044DFAA /* Model */,
 				0154CF431EE303580017900E /* AppDelegate.swift */,
+				01253CE01F1FC37D00F0D003 /* Sounds */,
 				0154CF4A1EE303580017900E /* Assets.xcassets */,
 				0154CF4F1EE303580017900E /* Info.plist */,
 			);
@@ -353,6 +356,7 @@
 			files = (
 				0154CF4E1EE303580017900E /* LaunchScreen.storyboard in Resources */,
 				0154CF4B1EE303580017900E /* Assets.xcassets in Resources */,
+				01253CE11F1FC37D00F0D003 /* Sounds in Resources */,
 				0154CF491EE303580017900E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

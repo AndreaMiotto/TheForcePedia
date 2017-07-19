@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class LandingViewController: UITableViewController {
     
@@ -19,6 +20,7 @@ class LandingViewController: UITableViewController {
     //ApplicationDelegate.swift
     var store: DataStore!
     
+    var audioPlayer:AVAudioPlayer!
     
     override func viewDidLoad() {
         store.fetchAllPersonsFromAPI() { (personResult) in
@@ -44,6 +46,7 @@ class LandingViewController: UITableViewController {
         store.fetchAllVehiclesFromAPI { (vehicleResult) in
             print("vehicles downloaded")
         }
+        playSound(path: "/Sounds/Hum", ofType: "mp3")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -69,30 +72,57 @@ class LandingViewController: UITableViewController {
         
         switch segue.identifier {
         case "showCharacters"?:
+            playSound(path: "/Sounds/Breathing", ofType: "mp3")
             let destinationVC = segue.destination as! PersonsTableViewController
             destinationVC.store = store
             
         case "showFilms"?:
+            playSound(path: "/Sounds/AcrossTheStars", ofType: "mp3")
             let destinationVC = segue.destination as! FilmsTableViewController
             destinationVC.store = store
             
         case "showPlanets"?:
+            playSound(path: "/Sounds/YodaHome", ofType: "mp3")
             let destinationVC = segue.destination as! PlanetsTableViewController
             destinationVC.store = store
             
         case "showSpecies"?:
+            playSound(path: "/Sounds/Jawa", ofType: "mp3")
             let destinationVC = segue.destination as! SpeciesTableViewController
             destinationVC.store = store
             
         case "showStarships"?:
+            playSound(path: "/Sounds/Snowspeeder", ofType: "mp3")
             let destinationVC = segue.destination as! StarshipsTableViewController
             destinationVC.store = store
+            
         case "showVehicles"?:
+            playSound(path: "/Sounds/SkywalkerSpinsOut", ofType: "mp3")
             let destinationVC = segue.destination as! VehiclesTableViewController
             destinationVC.store = store
         
         default:
             preconditionFailure("Unexpected segue identifier.")
+        }
+    }
+    
+    //--------------------
+    //MARK: - Audio Methods
+    //--------------------
+    
+    
+    func playSound(path: String, ofType type: String) {
+        let audioFilePath = Bundle.main.path(forResource: path, ofType: type)
+        if audioFilePath != nil {
+            let audioFileUrl = NSURL.fileURL(withPath: audioFilePath!)
+            do {
+                try audioPlayer = AVAudioPlayer(contentsOf: audioFileUrl, fileTypeHint: type)
+            } catch {
+                print("Error creating audio stream")
+            }
+            audioPlayer.play()
+        } else {
+            print("Audio file is not found")
         }
     }
 
