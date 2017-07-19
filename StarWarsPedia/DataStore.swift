@@ -71,7 +71,7 @@ class DataStore {
         })
         return container
     }()
-
+    
     
     //--------------------
     //MARK: - Person Methods
@@ -96,11 +96,13 @@ class DataStore {
     
     
     ///Fetch all the persons from the web Service (SWAPI)
-    func fetchAllPersonsFromAPI(fromURL url:URL? = nil, completion: @escaping (PersonsResult) -> Void) {
+    func fetchAllPersonsFromAPI(fromURL url:URL? = nil, dispatchGroup group: DispatchGroup, completion: @escaping (PersonsResult) -> Void) {
+        
+        group.enter()
         let request: URLRequest
         if let url = url {
             //Make a request with the url passed through
-           request = URLRequest(url: url)
+            request = URLRequest(url: url)
         } else {
             //Make a request with the SWAPI url
             let url = SWAPI.allPersonsURL
@@ -109,7 +111,7 @@ class DataStore {
         
         //create an istance of URLSessionTask
         //by giving the session a request and a completion closure
-        let task = session.dataTask(with: request) {
+        let task = self.session.dataTask(with: request) {
             (data, response, error) -> Void in
             
             let res = response as! HTTPURLResponse
@@ -123,7 +125,7 @@ class DataStore {
                     //if there is a next page
                     if let url = NextPageURL {
                         //make another request with the next page url
-                        self.fetchAllPersonsFromAPI(fromURL: url, completion: completion)
+                        self.fetchAllPersonsFromAPI(fromURL: url, dispatchGroup: group, completion: completion)
                     }
                     completion(result)
                 }
@@ -131,6 +133,7 @@ class DataStore {
         }
         //start the web service request
         task.resume()
+        
     }
     
     
@@ -184,7 +187,7 @@ class DataStore {
     //--------------------
     //MARK: -  Films Methods
     //--------------------
-
+    
     ///Fetch all films from CoreData
     func fetchAllFilmsFromDB(completition: @escaping (FilmsResult) -> Void) {
         let fetchRequest: NSFetchRequest<Film> = Film.fetchRequest()
@@ -205,8 +208,8 @@ class DataStore {
     
     
     ///Fetch all the films from the web Service (SWAPI)
-    func fetchAllFilmsFromAPI(fromURL url:URL? = nil, completion: @escaping (FilmsResult) -> Void) {
-        
+    func fetchAllFilmsFromAPI(fromURL url:URL? = nil, dispatchGroup group: DispatchGroup, completion: @escaping (FilmsResult) -> Void) {
+        group.enter()
         let request: URLRequest
         if let url = url {
             //Make a request with the url passed through
@@ -221,14 +224,14 @@ class DataStore {
         //by giving the session a request and a completion closure
         let task = session.dataTask(with: request) {
             (data, response, error) -> Void in
-                        
+            
             self.processFilmsRequest(data: data, error: error) { (result, NextPageURL) in
                 OperationQueue.main.addOperation {
                     
                     //if there is a next page
                     if let url = NextPageURL {
                         //make another request with the next page url
-                        self.fetchAllFilmsFromAPI(fromURL: url, completion: completion)
+                        self.fetchAllFilmsFromAPI(fromURL: url, dispatchGroup: group, completion: completion)
                     }
                     completion(result)
                 }
@@ -308,7 +311,8 @@ class DataStore {
     
     
     ///Fetch all the planets from the web Service (SWAPI)
-    func fetchAllPlanetsFromAPI(fromURL url:URL? = nil, completion: @escaping (PlanetsResult) -> Void) {
+    func fetchAllPlanetsFromAPI(fromURL url:URL? = nil, dispatchGroup group: DispatchGroup, completion: @escaping (PlanetsResult) -> Void) {
+        group.enter()
         let request: URLRequest
         if let url = url {
             //Make a request with the url passed through
@@ -335,7 +339,7 @@ class DataStore {
                     //if there is a next page
                     if let url = NextPageURL {
                         //make another request with the next page url
-                        self.fetchAllPlanetsFromAPI(fromURL: url, completion: completion)
+                        self.fetchAllPlanetsFromAPI(fromURL: url, dispatchGroup: group, completion: completion)
                     }
                     completion(result)
                 }
@@ -393,8 +397,8 @@ class DataStore {
             }
         }
     }
-
-
+    
+    
     
     //--------------------
     //MARK: -  Species Methods
@@ -419,7 +423,8 @@ class DataStore {
     
     
     ///Fetch all the species from the web Service (SWAPI)
-    func fetchAllSpeciesFromAPI(fromURL url:URL? = nil, completion: @escaping (SpeciesResult) -> Void) {
+    func fetchAllSpeciesFromAPI(fromURL url:URL? = nil, dispatchGroup group: DispatchGroup, completion: @escaping (SpeciesResult) -> Void) {
+        group.enter()
         let request: URLRequest
         if let url = url {
             //Make a request with the url passed through
@@ -446,7 +451,7 @@ class DataStore {
                     //if there is a next page
                     if let url = NextPageURL {
                         //make another request with the next page url
-                        self.fetchAllSpeciesFromAPI(fromURL: url, completion: completion)
+                        self.fetchAllSpeciesFromAPI(fromURL: url, dispatchGroup: group, completion: completion)
                     }
                     completion(result)
                 }
@@ -504,7 +509,7 @@ class DataStore {
             }
         }
     }
-
+    
     
     //--------------------
     //MARK: -  Starhsips Methods
@@ -529,7 +534,9 @@ class DataStore {
     
     
     ///Fetch all the starships from the web Service (SWAPI)
-    func fetchAllStarshipsFromAPI(fromURL url:URL? = nil, completion: @escaping (StarshipsResult) -> Void) {
+    func fetchAllStarshipsFromAPI(fromURL url:URL? = nil, dispatchGroup group: DispatchGroup,
+                                  completion: @escaping (StarshipsResult) -> Void) {
+        group.enter()
         let request: URLRequest
         if let url = url {
             //Make a request with the url passed through
@@ -556,7 +563,7 @@ class DataStore {
                     //if there is a next page
                     if let url = NextPageURL {
                         //make another request with the next page url
-                        self.fetchAllStarshipsFromAPI(fromURL: url, completion: completion)
+                        self.fetchAllStarshipsFromAPI(fromURL: url, dispatchGroup: group, completion: completion)
                     }
                     completion(result)
                 }
@@ -638,7 +645,8 @@ class DataStore {
     
     
     ///Fetch all the vehicles from the web Service (SWAPI)
-    func fetchAllVehiclesFromAPI(fromURL url:URL? = nil, completion: @escaping (VehiclesResult) -> Void) {
+    func fetchAllVehiclesFromAPI(fromURL url:URL? = nil, dispatchGroup group: DispatchGroup, completion: @escaping (VehiclesResult) -> Void) {
+        group.enter()
         let request: URLRequest
         if let url = url {
             //Make a request with the url passed through
@@ -665,7 +673,7 @@ class DataStore {
                     //if there is a next page
                     if let url = NextPageURL {
                         //make another request with the next page url
-                        self.fetchAllVehiclesFromAPI(fromURL: url, completion: completion)
+                        self.fetchAllVehiclesFromAPI(fromURL: url, dispatchGroup: group, completion: completion)
                     }
                     completion(result)
                 }
@@ -727,7 +735,7 @@ class DataStore {
     //--------------------
     //MARK: - Helpers
     //--------------------
-
+    
 }
 
 

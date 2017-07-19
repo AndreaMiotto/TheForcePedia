@@ -23,29 +23,43 @@ class LandingViewController: UITableViewController {
     var audioPlayer:AVAudioPlayer!
     
     override func viewDidLoad() {
-        store.fetchAllPersonsFromAPI() { (personResult) in
+        
+        let group = DispatchGroup()
+    
+        store.fetchAllPersonsFromAPI(dispatchGroup: group) { (personResult) in
             print("characters downloaded")
+            group.leave()
         }
         
-        store.fetchAllFilmsFromAPI { (filmResult) in
+        store.fetchAllFilmsFromAPI(dispatchGroup: group) { (filmResult) in
             print("films downloaded")
+            group.leave()
         }
         
-        store.fetchAllPlanetsFromAPI { (planetResult) in
+        store.fetchAllPlanetsFromAPI(dispatchGroup: group) { (planetResult) in
             print("planets downloaded")
+            group.leave()
         }
         
-        store.fetchAllSpeciesFromAPI { (specieResult) in
+        store.fetchAllSpeciesFromAPI(dispatchGroup: group) { (specieResult) in
             print("species downloaded")
+            group.leave()
         }
         
-        store.fetchAllStarshipsFromAPI { (starshipResult) in
+        store.fetchAllStarshipsFromAPI(dispatchGroup: group) { (starshipResult) in
             print("starships downloaded")
+            group.leave()
         }
         
-        store.fetchAllVehiclesFromAPI { (vehicleResult) in
+        store.fetchAllVehiclesFromAPI(dispatchGroup: group) { (vehicleResult) in
             print("vehicles downloaded")
+            group.leave()
         }
+        
+        group.notify(queue: DispatchQueue.global(qos: .background)) {
+            print("All async calls were run!")
+        }
+        
         playSound(path: "/Sounds/Hum", ofType: "mp3")
     }
     
