@@ -45,7 +45,7 @@ class FilmDetailsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.title = film.title
         planets = film.planets?.allObjects as! [Planet]
         species = film.species?.allObjects as! [Specie]
@@ -54,6 +54,7 @@ class FilmDetailsTableViewController: UITableViewController {
         persons = film.characters?.allObjects as! [Person]
         
         updateConnections()
+        
         
     }
     

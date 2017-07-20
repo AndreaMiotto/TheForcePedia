@@ -20,65 +20,32 @@ class LandingViewController: UITableViewController {
     //ApplicationDelegate.swift
     var store: DataStore!
     
-    ///This is the audio player to play mp3 files
     var audioPlayer:AVAudioPlayer!
     
-
     override func viewDidLoad() {
-        
-        super.viewDidLoad()
-        
-        //Disable row selection and display activity indicator
-        tableView.allowsSelection = false
-        ProgressView.shared.showProgressView(view)
-        
-        ///This is the group that contains all the async tasks
-        let group = DispatchGroup()
-    
-        //Download the data from API
-        store.fetchAllPersonsFromAPI(dispatchGroup: group) { (personResult) in
+        store.fetchAllPersonsFromAPI() { (personResult) in
             print("characters downloaded")
-            group.leave()
         }
         
-        store.fetchAllFilmsFromAPI(dispatchGroup: group) { (filmResult) in
+        store.fetchAllFilmsFromAPI { (filmResult) in
             print("films downloaded")
-            group.leave()
         }
         
-        store.fetchAllPlanetsFromAPI(dispatchGroup: group) { (planetResult) in
+        store.fetchAllPlanetsFromAPI { (planetResult) in
             print("planets downloaded")
-            group.leave()
         }
         
-        store.fetchAllSpeciesFromAPI(dispatchGroup: group) { (specieResult) in
+        store.fetchAllSpeciesFromAPI { (specieResult) in
             print("species downloaded")
-            group.leave()
         }
         
-        store.fetchAllStarshipsFromAPI(dispatchGroup: group) { (starshipResult) in
+        store.fetchAllStarshipsFromAPI { (starshipResult) in
             print("starships downloaded")
-            group.leave()
         }
         
-        store.fetchAllVehiclesFromAPI(dispatchGroup: group) { (vehicleResult) in
+        store.fetchAllVehiclesFromAPI { (vehicleResult) in
             print("vehicles downloaded")
-            group.leave()
         }
-        
-        //If all the async tasks are completed
-        group.notify(queue: DispatchQueue.global(qos: .background)) {
-            print("All async calls were run!")
-            DispatchQueue.main.async(){
-                //Hide the activity Indicator
-                ProgressView.shared.hideProgressView()
-                //Allow row selections
-                self.tableView.allowsSelection = true
-            }
-            
-        }
-        
-        //Play the intro sound
         playSound(path: "/Sounds/Hum", ofType: "mp3")
     }
     
@@ -101,7 +68,7 @@ class LandingViewController: UITableViewController {
         let backItem = UIBarButtonItem()
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
-
+        
         
         switch segue.identifier {
         case "showCharacters"?:
@@ -133,7 +100,7 @@ class LandingViewController: UITableViewController {
             playSound(path: "/Sounds/SkywalkerSpinsOut", ofType: "mp3")
             let destinationVC = segue.destination as! VehiclesTableViewController
             destinationVC.store = store
-        
+            
         default:
             preconditionFailure("Unexpected segue identifier.")
         }
@@ -158,5 +125,5 @@ class LandingViewController: UITableViewController {
             print("Audio file is not found")
         }
     }
-
+    
 }
