@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0154CF3F1EE303580017900E"
-               BuildableName = "StarWarsPedia.app"
-               BlueprintName = "StarWarsPedia"
-               ReferencedContainer = "container:StarWarsPedia.xcodeproj">
+               BuildableName = "TheForcePedia.app"
+               BlueprintName = "TheForcePedia"
+               ReferencedContainer = "container:TheForcePedia.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0154CF531EE303580017900E"
-               BuildableName = "StarWarsPediaTests.xctest"
-               BlueprintName = "StarWarsPediaTests"
-               ReferencedContainer = "container:StarWarsPedia.xcodeproj">
+               BuildableName = "TheForcePediaTests.xctest"
+               BlueprintName = "TheForcePediaTests"
+               ReferencedContainer = "container:TheForcePedia.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0154CF5E1EE303580017900E"
-               BuildableName = "StarWarsPediaUITests.xctest"
-               BlueprintName = "StarWarsPediaUITests"
-               ReferencedContainer = "container:StarWarsPedia.xcodeproj">
+               BuildableName = "TheForcePediaUITests.xctest"
+               BlueprintName = "TheForcePediaUITests"
+               ReferencedContainer = "container:TheForcePedia.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -53,9 +53,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0154CF3F1EE303580017900E"
-            BuildableName = "StarWarsPedia.app"
-            BlueprintName = "StarWarsPedia"
-            ReferencedContainer = "container:StarWarsPedia.xcodeproj">
+            BuildableName = "TheForcePedia.app"
+            BlueprintName = "TheForcePedia"
+            ReferencedContainer = "container:TheForcePedia.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0154CF3F1EE303580017900E"
-            BuildableName = "StarWarsPedia.app"
-            BlueprintName = "StarWarsPedia"
-            ReferencedContainer = "container:StarWarsPedia.xcodeproj">
+            BuildableName = "TheForcePedia.app"
+            BlueprintName = "TheForcePedia"
+            ReferencedContainer = "container:TheForcePedia.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -95,9 +95,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0154CF3F1EE303580017900E"
-            BuildableName = "StarWarsPedia.app"
-            BlueprintName = "StarWarsPedia"
-            ReferencedContainer = "container:StarWarsPedia.xcodeproj">
+            BuildableName = "TheForcePedia.app"
+            BlueprintName = "TheForcePedia"
+            ReferencedContainer = "container:TheForcePedia.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

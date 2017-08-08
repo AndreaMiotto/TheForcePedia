@@ -79,16 +79,16 @@
 		01486C101EFFBC70009D0ADB /* SpecieDetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecieDetailsTableViewController.swift; sourceTree = "<group>"; };
 		01486C121EFFBC7A009D0ADB /* StarshipDetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarshipDetailsTableViewController.swift; sourceTree = "<group>"; };
 		01486C141EFFBC84009D0ADB /* VehicleDetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleDetailsTableViewController.swift; sourceTree = "<group>"; };
-		0154CF401EE303580017900E /* StarWarsPedia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StarWarsPedia.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0154CF401EE303580017900E /* TheForcePedia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheForcePedia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0154CF431EE303580017900E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0154CF481EE303580017900E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0154CF4A1EE303580017900E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0154CF4D1EE303580017900E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0154CF4F1EE303580017900E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0154CF541EE303580017900E /* StarWarsPediaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StarWarsPediaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0154CF541EE303580017900E /* TheForcePediaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheForcePediaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0154CF581EE303580017900E /* StarWarsPediaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarWarsPediaTests.swift; sourceTree = "<group>"; };
 		0154CF5A1EE303580017900E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0154CF5F1EE303580017900E /* StarWarsPediaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StarWarsPediaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0154CF5F1EE303580017900E /* TheForcePediaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheForcePediaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0154CF631EE303580017900E /* StarWarsPediaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarWarsPediaUITests.swift; sourceTree = "<group>"; };
 		0154CF651EE303580017900E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0172C4EC1EE7255500023650 /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
@@ -135,9 +135,9 @@
 		0154CF371EE303580017900E = {
 			isa = PBXGroup;
 			children = (
-				0154CF421EE303580017900E /* StarWarsPedia */,
-				0154CF571EE303580017900E /* StarWarsPediaTests */,
-				0154CF621EE303580017900E /* StarWarsPediaUITests */,
+				0154CF421EE303580017900E /* TheForcePedia */,
+				0154CF571EE303580017900E /* TheForcePediaTests */,
+				0154CF621EE303580017900E /* TheForcePediaUITests */,
 				0154CF411EE303580017900E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -145,14 +145,14 @@
 		0154CF411EE303580017900E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0154CF401EE303580017900E /* StarWarsPedia.app */,
-				0154CF541EE303580017900E /* StarWarsPediaTests.xctest */,
-				0154CF5F1EE303580017900E /* StarWarsPediaUITests.xctest */,
+				0154CF401EE303580017900E /* TheForcePedia.app */,
+				0154CF541EE303580017900E /* TheForcePediaTests.xctest */,
+				0154CF5F1EE303580017900E /* TheForcePediaUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		0154CF421EE303580017900E /* StarWarsPedia */ = {
+		0154CF421EE303580017900E /* TheForcePedia */ = {
 			isa = PBXGroup;
 			children = (
 				0179AE141EE41DEF0089A472 /* WebService */,
@@ -164,24 +164,27 @@
 				0154CF4A1EE303580017900E /* Assets.xcassets */,
 				0154CF4F1EE303580017900E /* Info.plist */,
 			);
+			name = TheForcePedia;
 			path = StarWarsPedia;
 			sourceTree = "<group>";
 		};
-		0154CF571EE303580017900E /* StarWarsPediaTests */ = {
+		0154CF571EE303580017900E /* TheForcePediaTests */ = {
 			isa = PBXGroup;
 			children = (
 				0154CF581EE303580017900E /* StarWarsPediaTests.swift */,
 				0154CF5A1EE303580017900E /* Info.plist */,
 			);
+			name = TheForcePediaTests;
 			path = StarWarsPediaTests;
 			sourceTree = "<group>";
 		};
-		0154CF621EE303580017900E /* StarWarsPediaUITests */ = {
+		0154CF621EE303580017900E /* TheForcePediaUITests */ = {
 			isa = PBXGroup;
 			children = (
 				0154CF631EE303580017900E /* StarWarsPediaUITests.swift */,
 				0154CF651EE303580017900E /* Info.plist */,
 			);
+			name = TheForcePediaUITests;
 			path = StarWarsPediaUITests;
 			sourceTree = "<group>";
 		};
@@ -247,9 +250,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0154CF3F1EE303580017900E /* StarWarsPedia */ = {
+		0154CF3F1EE303580017900E /* TheForcePedia */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0154CF681EE303580017900E /* Build configuration list for PBXNativeTarget "StarWarsPedia" */;
+			buildConfigurationList = 0154CF681EE303580017900E /* Build configuration list for PBXNativeTarget "TheForcePedia" */;
 			buildPhases = (
 				0154CF3C1EE303580017900E /* Sources */,
 				0154CF3D1EE303580017900E /* Frameworks */,
@@ -259,14 +262,14 @@
 			);
 			dependencies = (
 			);
-			name = StarWarsPedia;
+			name = TheForcePedia;
 			productName = StarWarsPedia;
-			productReference = 0154CF401EE303580017900E /* StarWarsPedia.app */;
+			productReference = 0154CF401EE303580017900E /* TheForcePedia.app */;
 			productType = "com.apple.product-type.application";
 		};
-		0154CF531EE303580017900E /* StarWarsPediaTests */ = {
+		0154CF531EE303580017900E /* TheForcePediaTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0154CF6B1EE303580017900E /* Build configuration list for PBXNativeTarget "StarWarsPediaTests" */;
+			buildConfigurationList = 0154CF6B1EE303580017900E /* Build configuration list for PBXNativeTarget "TheForcePediaTests" */;
 			buildPhases = (
 				0154CF501EE303580017900E /* Sources */,
 				0154CF511EE303580017900E /* Frameworks */,
@@ -277,14 +280,14 @@
 			dependencies = (
 				0154CF561EE303580017900E /* PBXTargetDependency */,
 			);
-			name = StarWarsPediaTests;
+			name = TheForcePediaTests;
 			productName = StarWarsPediaTests;
-			productReference = 0154CF541EE303580017900E /* StarWarsPediaTests.xctest */;
+			productReference = 0154CF541EE303580017900E /* TheForcePediaTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		0154CF5E1EE303580017900E /* StarWarsPediaUITests */ = {
+		0154CF5E1EE303580017900E /* TheForcePediaUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0154CF6E1EE303580017900E /* Build configuration list for PBXNativeTarget "StarWarsPediaUITests" */;
+			buildConfigurationList = 0154CF6E1EE303580017900E /* Build configuration list for PBXNativeTarget "TheForcePediaUITests" */;
 			buildPhases = (
 				0154CF5B1EE303580017900E /* Sources */,
 				0154CF5C1EE303580017900E /* Frameworks */,
@@ -295,9 +298,9 @@
 			dependencies = (
 				0154CF611EE303580017900E /* PBXTargetDependency */,
 			);
-			name = StarWarsPediaUITests;
+			name = TheForcePediaUITests;
 			productName = StarWarsPediaUITests;
-			productReference = 0154CF5F1EE303580017900E /* StarWarsPediaUITests.xctest */;
+			productReference = 0154CF5F1EE303580017900E /* TheForcePediaUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -329,7 +332,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 0154CF3B1EE303580017900E /* Build configuration list for PBXProject "StarWarsPedia" */;
+			buildConfigurationList = 0154CF3B1EE303580017900E /* Build configuration list for PBXProject "TheForcePedia" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -342,9 +345,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0154CF3F1EE303580017900E /* StarWarsPedia */,
-				0154CF531EE303580017900E /* StarWarsPediaTests */,
-				0154CF5E1EE303580017900E /* StarWarsPediaUITests */,
+				0154CF3F1EE303580017900E /* TheForcePedia */,
+				0154CF531EE303580017900E /* TheForcePediaTests */,
+				0154CF5E1EE303580017900E /* TheForcePediaUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -436,12 +439,12 @@
 /* Begin PBXTargetDependency section */
 		0154CF561EE303580017900E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0154CF3F1EE303580017900E /* StarWarsPedia */;
+			target = 0154CF3F1EE303580017900E /* TheForcePedia */;
 			targetProxy = 0154CF551EE303580017900E /* PBXContainerItemProxy */;
 		};
 		0154CF611EE303580017900E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0154CF3F1EE303580017900E /* StarWarsPedia */;
+			target = 0154CF3F1EE303580017900E /* TheForcePedia */;
 			targetProxy = 0154CF601EE303580017900E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -600,7 +603,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "AndreaMiotto-com.github.StarWarsPediaTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StarWarsPedia.app/StarWarsPedia";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TheForcePedia.app/TheForcePedia";
 			};
 			name = Debug;
 		};
@@ -615,7 +618,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "AndreaMiotto-com.github.StarWarsPediaTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StarWarsPedia.app/StarWarsPedia";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TheForcePedia.app/TheForcePedia";
 			};
 			name = Release;
 		};
@@ -650,7 +653,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0154CF3B1EE303580017900E /* Build configuration list for PBXProject "StarWarsPedia" */ = {
+		0154CF3B1EE303580017900E /* Build configuration list for PBXProject "TheForcePedia" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0154CF661EE303580017900E /* Debug */,
@@ -659,7 +662,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0154CF681EE303580017900E /* Build configuration list for PBXNativeTarget "StarWarsPedia" */ = {
+		0154CF681EE303580017900E /* Build configuration list for PBXNativeTarget "TheForcePedia" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0154CF691EE303580017900E /* Debug */,
@@ -668,7 +671,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0154CF6B1EE303580017900E /* Build configuration list for PBXNativeTarget "StarWarsPediaTests" */ = {
+		0154CF6B1EE303580017900E /* Build configuration list for PBXNativeTarget "TheForcePediaTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0154CF6C1EE303580017900E /* Debug */,
@@ -677,7 +680,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0154CF6E1EE303580017900E /* Build configuration list for PBXNativeTarget "StarWarsPediaUITests" */ = {
+		0154CF6E1EE303580017900E /* Build configuration list for PBXNativeTarget "TheForcePediaUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0154CF6F1EE303580017900E /* Debug */,

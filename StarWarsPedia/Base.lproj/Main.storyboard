@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Star Wars Pedia-->
+        <!--The Force Pedia-->
         <scene sceneID="PHB-gq-0QP">
             <objects>
-                <tableViewController id="BFL-8n-4oA" customClass="LandingViewController" customModule="StarWarsPedia" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="BFL-8n-4oA" customClass="LandingViewController" customModule="TheForcePedia" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="MgT-Px-PJj">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -228,7 +228,7 @@
                             <outlet property="delegate" destination="BFL-8n-4oA" id="48J-G2-Su3"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Star Wars Pedia" id="Yt3-8f-0wh">
+                    <navigationItem key="navigationItem" title="The Force Pedia" id="Yt3-8f-0wh">
                         <barButtonItem key="backBarButtonItem" title=" " id="CQo-aA-JSW"/>
                     </navigationItem>
                 </tableViewController>
@@ -239,7 +239,7 @@
         <!--Vehicles-->
         <scene sceneID="cnI-mQ-V55">
             <objects>
-                <tableViewController title="Vehicles" id="Gy0-J3-DuE" customClass="VehiclesTableViewController" customModule="StarWarsPedia" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Vehicles" id="Gy0-J3-DuE" customClass="VehiclesTableViewController" customModule="TheForcePedia" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="vI6-W3-qaA">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -281,7 +281,7 @@
         <!--Characters-->
         <scene sceneID="CpM-gS-UOP">
             <objects>
-                <tableViewController title="Characters" id="pzt-ee-5bp" customClass="PersonsTableViewController" customModule="StarWarsPedia" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Characters" id="pzt-ee-5bp" customClass="PersonsTableViewController" customModule="TheForcePedia" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="yh7-MR-ZVC">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -323,7 +323,7 @@
         <!--Character Details-->
         <scene sceneID="Szh-cs-s2v">
             <objects>
-                <tableViewController title="Character Details" id="93x-1S-QB9" customClass="PersonDetailsTableViewController" customModule="StarWarsPedia" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Character Details" id="93x-1S-QB9" customClass="PersonDetailsTableViewController" customModule="TheForcePedia" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="lEx-ZI-W1Y">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -398,7 +398,7 @@
         <!--Web View Controller-->
         <scene sceneID="Kaf-Xd-EHl">
             <objects>
-                <viewController storyboardIdentifier="webViewController" id="6ZG-Lx-gPH" customClass="WebViewController" customModule="StarWarsPedia" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="webViewController" id="6ZG-Lx-gPH" customClass="WebViewController" customModule="TheForcePedia" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hgf-t3-mwp"/>
                         <viewControllerLayoutGuide type="bottom" id="8Ao-3L-ppI"/>
@@ -452,7 +452,7 @@
         <!--Films-->
         <scene sceneID="FW4-ag-caa">
             <objects>
-                <tableViewController title="Films" id="cRD-M4-4ts" customClass="FilmsTableViewController" customModule="StarWarsPedia" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Films" id="cRD-M4-4ts" customClass="FilmsTableViewController" customModule="TheForcePedia" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Kru-bR-3kI">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -494,7 +494,7 @@
         <!--Starships-->
         <scene sceneID="E5h-pB-o7w">
             <objects>
-                <tableViewController title="Starships" id="12L-yr-azT" customClass="StarshipsTableViewController" customModule="StarWarsPedia" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Starships" id="12L-yr-azT" customClass="StarshipsTableViewController" customModule="TheForcePedia" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="PDE-s1-0tQ">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -536,7 +536,7 @@
         <!--Species-->
         <scene sceneID="OQM-J0-7uQ">
             <objects>
-                <tableViewController title="Species" id="6Sy-un-ol4" customClass="SpeciesTableViewController" customModule="StarWarsPedia" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Species" id="6Sy-un-ol4" customClass="SpeciesTableViewController" customModule="TheForcePedia" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="SdT-WJ-FIs">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -578,7 +578,7 @@
         <!--Planets-->
         <scene sceneID="muS-pc-aV6">
             <objects>
-                <tableViewController title="Planets" id="ms6-Bx-QJv" customClass="PlanetsTableViewController" customModule="StarWarsPedia" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Planets" id="ms6-Bx-QJv" customClass="PlanetsTableViewController" customModule="TheForcePedia" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Da8-hL-wcm">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -641,7 +641,7 @@
         <!--Film Details-->
         <scene sceneID="x1h-jv-qx3">
             <objects>
-                <tableViewController title="Film Details" id="QBe-S6-oOt" customClass="FilmDetailsTableViewController" customModule="StarWarsPedia" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Film Details" id="QBe-S6-oOt" customClass="FilmDetailsTableViewController" customModule="TheForcePedia" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="soS-6p-eBO">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -716,7 +716,7 @@
         <!--Planet Details-->
         <scene sceneID="1uE-nR-lLB">
             <objects>
-                <tableViewController title="Planet Details" id="Bbv-Og-k5i" customClass="PlanetDetailsTableViewController" customModule="StarWarsPedia" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Planet Details" id="Bbv-Og-k5i" customClass="PlanetDetailsTableViewController" customModule="TheForcePedia" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="N6f-vM-C4h">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -791,7 +791,7 @@
         <!--Specie Details-->
         <scene sceneID="EVL-VB-W5Q">
             <objects>
-                <tableViewController title="Specie Details" id="ed5-Ld-tp2" customClass="SpecieDetailsTableViewController" customModule="StarWarsPedia" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Specie Details" id="ed5-Ld-tp2" customClass="SpecieDetailsTableViewController" customModule="TheForcePedia" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="PdR-p3-Q1X">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -866,7 +866,7 @@
         <!--Starship Details-->
         <scene sceneID="579-AA-68C">
             <objects>
-                <tableViewController title="Starship Details" id="k9R-Us-PQ1" customClass="StarshipDetailsTableViewController" customModule="StarWarsPedia" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Starship Details" id="k9R-Us-PQ1" customClass="StarshipDetailsTableViewController" customModule="TheForcePedia" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="kYE-Ce-omV">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -941,7 +941,7 @@
         <!--Vehicle Details-->
         <scene sceneID="X08-ze-H3u">
             <objects>
-                <tableViewController title="Vehicle Details" id="WtG-DH-QNG" customClass="VehicleDetailsTableViewController" customModule="StarWarsPedia" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Vehicle Details" id="WtG-DH-QNG" customClass="VehicleDetailsTableViewController" customModule="TheForcePedia" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="RzM-bQ-DWZ">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1015,11 +1015,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="characters_ico" width="94" height="59"/>
-        <image name="films_ico" width="75" height="61"/>
+        <image name="characters_ico" width="100" height="99"/>
+        <image name="films_ico" width="100" height="100"/>
         <image name="images_ico" width="25" height="23"/>
-        <image name="planets_ico" width="84" height="77"/>
-        <image name="species_ico" width="79" height="82"/>
+        <image name="planets_ico" width="100" height="100"/>
+        <image name="species_ico" width="1396" height="1396"/>
         <image name="starship_ico" width="100" height="99"/>
         <image name="vehicle_ico" width="100" height="99"/>
     </resources>
